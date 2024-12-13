@@ -1,0 +1,20 @@
+<?php
+namespace App\Reposotories;
+
+use PDO;
+
+class Repository {
+    protected $connection;
+
+    function __constructor() {
+        require __DIR__ . '/../config/dbconfig.php';
+
+        try {
+            $this->connection = new PDO("$type:host=$servername;dbname=$database", $username, $password);
+            $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        } catch (PDOException $e) {
+            echo "Connection failed: " . $e->getMessage();
+        }
+    }
+}
+?>

@@ -1,5 +1,5 @@
 <?php
-namespace App\Models
+namespace App\Models;
 
 class Student extends User {
     private $studentId;

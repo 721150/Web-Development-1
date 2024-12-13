@@ -1,16 +1,5 @@
 <?php
-if ($_SERVER['REQUEST_METHOD'] == "POST") {
-    // Controleer inloggegeven en leid verder
-    $email = $_POST['email'];
-    $password = $_POST['password'];
 
-    if ($email == "admin@mail.nl" && $password == "secret") {
-        session_start();
-        $_SESSION['email'] = $email;
-        require("../views/home/index.php");
-        exit;
-    }
-}
 ?>
 <!DOCTYPE html>
 <html lang="nl-NL">
@@ -24,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 <div class="container col-12 col-md-8 col-lg-6 p-5">
     <div class="card">
         <div class="card-body bg-light">
-            <form method="POST" action="">
+            <form method="POST">
             <div class="mb-4 text-center">
                 <img src="../img/logo.png" alt="Logo" width="100" height="100">
             </div>
