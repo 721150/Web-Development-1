@@ -26,7 +26,7 @@ $vragenlijsten = [
         <a href="#" class="text-white d-block py-2" style="text-decoration: none;">Home</a>
         <a href="#" class="text-white d-block py-2" style="text-decoration: none;">Vragenlijsten</a>
         <a href="#" class="text-white d-block py-2" style="text-decoration: none;">Instellingen</a>
-        <a href="..\..\controllers\endingsession.php" class="text-white d-block py-2" style="text-decoration: none;">Uitloggen</a>
+        <a href="/StudentDasboard/endSession" class="text-white d-block py-2" style="text-decoration: none;">Uitloggen</a>
     </div>
     <div class="content flex-grow-1 p-4 overflow-auto">
         <h2>Openstaande Vragenlijsten</h2>
