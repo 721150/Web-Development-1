@@ -15,7 +15,7 @@
         <div class="card-body bg-light">
             <form method="POST">
             <div class="mb-4 text-center">
-                <img src="../img/logo.png" alt="Logo" width="100" height="100">
+                <img src="<?php echo __DIR__ . '/../img/logo.png'; ?>" alt="Logo" width="100" height="100">
             </div>
             <div class="mb-3">
                 <label for="inputEmail" class="form-label">E-mailadres</label>

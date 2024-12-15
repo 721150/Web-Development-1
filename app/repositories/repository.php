@@ -1,12 +1,12 @@
 <?php
-namespace App\Reposotories;
+namespace App\Repositories;
 
 use PDO;
 
 class Repository {
     protected $connection;
 
-    function __constructor() {
+    function __construct() {
         require __DIR__ . '/../config/dbconfig.php';
 
         try {

@@ -1,9 +1,9 @@
 <?php
 namespace App\Views;
-if (!isset($_SESSION['email'])) {
-    require("../views/home/login.php");
-    exit;
-}
+//if (!isset($_SESSION['email'])) {
+//    require("../views/home/login.php");
+ //   exit;
+//}
 $vragenlijsten = [
     'Vragenlijst 1',
     'Vragenlijst 2',

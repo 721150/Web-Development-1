@@ -1,5 +1,5 @@
 <?php
-namespace App\Reposotories;
+namespace App\Repositories;
 
 use PDO;
 
@@ -9,7 +9,7 @@ class StudentRepository extends Repository {
         $stmt = $this->connection->prepare("SELECT * FROM Student JOIN User ON Student.studentId = User.id");
         $stmt->execute();
 
-        $stmt->setFetchMode(PDO::FETCH_CLASS, 'App\\Models\\Article');
+        $stmt->setFetchMode(PDO::FETCH_CLASS, 'App\\Models\\Student');
         $students = $stmt->fetchAll();
 
         return $students;
@@ -19,7 +19,7 @@ class StudentRepository extends Repository {
         $this->connection->beginTransaction();
 
         $stmt = $this->connection->prepare("
-            INSERT INTO [User] (firstName, lastName, emailAddress, [password], [image]) 
+            INSERT INTO `User` (firstName, lastName, emailAddress, password, image) 
             VALUES (:firstName, :lastName, :emailAddress, :password, :image)
         ");
         $stmt->execute([

@@ -1,19 +1,24 @@
 <?php
-namespace App\Reposotories;
+namespace App\Repositories;
 
 use PDO;
 
-class StudentRepository extends Repository {
+class LoginRepository extends Repository {
     
-    function validLogin($email, $password) {
+    function __construct() {
+        parent::__construct();
+    }
+
+    public function validLogin($email, $password) {
         $validLogin = false;
         try {
-            $stmt = $this->connection->prepare("SELECT * FROM [User] WHERE emailAddress = :email");
-            $stmt->execute([':email' => $email]);
+            $stmt = $this->connection->prepare("SELECT * FROM `User` WHERE emailAddress = :email AND password = :password");
+            $stmt->execute([':email' => $email,
+                            ':password' => $password]);
 
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            if ($user != null)) {
+            if ($user != null) {
                 $validLogin = true;
             }
         } catch (Exception $e) {}
