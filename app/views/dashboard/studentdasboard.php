@@ -11,7 +11,7 @@ $course = isset($course) ? $course : 'Onbekend vak';
 $teacher = isset($teacher) ? $teacher : 'Onbekende docent';
 ?>
 <!DOCTYPE html>
-<html lang="nl">
+<html lang="nl-NL">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
