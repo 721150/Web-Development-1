@@ -1,15 +1,14 @@
 <?php
 namespace App\Views;
-//if (!isset($_SESSION['email'])) {
-//    require("../views/home/login.php");
- //   exit;
-//}
+
 $vragenlijsten = [
     'Vragenlijst 1',
     'Vragenlijst 2',
     'Vragenlijst 3',
     // testlijst
 ];
+$course = isset($course) ? $course : 'Onbekend vak';
+$teacher = isset($teacher) ? $teacher : 'Onbekende docent';
 ?>
 <!DOCTYPE html>
 <html lang="nl">
@@ -36,7 +35,11 @@ $vragenlijsten = [
             ?>
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     <?= htmlspecialchars($vragenlijst); ?>
-                    <button class="btn btn-primary btn-sm">Openen</button>
+                    <form action="/Studentdasboard/openQuestionnaire" method="post" class="d-inline">
+                        <input type="hidden" name="course" value="<?= htmlspecialchars($course); ?>">
+                        <input type="hidden" name="teacher" value="<?= htmlspecialchars($teacher); ?>">
+                        <button type="submit" class="btn btn-primary btn-sm">Openen</button>
+                    </form>
                 </li>
             <?php 
             endforeach; 

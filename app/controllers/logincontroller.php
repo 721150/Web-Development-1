@@ -5,10 +5,13 @@ class LoginController {
     protected $loginService;
 
     function __construct() {
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
         $this->loginService = new \App\Services\LoginService();
     }
 
-    protected function login() {   
+    public function login() {  
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $email = htmlspecialchars($_POST['email']);
             $password = htmlspecialchars($_POST['password']);
@@ -27,8 +30,8 @@ class LoginController {
         require __DIR__ . '/../views/home/login.php';
     }
 
-    protected function checkLogin() {
-        return isset($_SESSION['email']);
+    public function checkLogin() {
+        return isset($_SESSION['name']);
     }
 }
 ?>
