@@ -22,7 +22,7 @@ $vragenlijsten = [
 <body class="d-flex vh-100 overflow-hidden">
     <div class="sidebar bg-dark text-white p-3" style="width: 250px;">
         <h2>Dashboard</h2>
-        <h5>Welkom, <?=$_SESSION['email']?>!</h5>
+        <h5>Welkom, <?=$_SESSION['name']?>!</h5>
         <a href="#" class="text-white d-block py-2" style="text-decoration: none;">Home</a>
         <a href="#" class="text-white d-block py-2" style="text-decoration: none;">Vragenlijsten</a>
         <a href="#" class="text-white d-block py-2" style="text-decoration: none;">Instellingen</a>
