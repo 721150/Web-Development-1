@@ -3,24 +3,38 @@ namespace App\Models;
 
 class Assessment {
     private $id;
-    private $questionOne;
-    private $questionTwo;
-    private $questionThree;
-    private $questionFour;
-    private $questionFive;
-    private $questionSix;
-    private $dateTime
+    private $answerOne;
+    private $answerTwo;
+    private $answerThree;
+    private $answerFour;
+    private $answerFive;
+    private $answerSix;
+    private $answerSeven;
+    private $answerEight;
+    private $answerNine;
+    private $answerTen;
+    private $answerEleven;
+    private $answerTwelve;
+    private $answerThirteen;
+    private $dateTime;
     private $studentId;
     private $courseId;
 
-    public function __construct($_id, $_questionOne, $_questionTwo, $_questionThree, $_questionFour, $_questionFive, $_questionSix, $_dateTime, $_studentId, $_courseId) {
+    public function __construct($_id, $_answerOne, $_answerTwo, $_answerThree, $_answerFour, $_answerFive, $_answerSix, $_answerSeven, $_answerEight, $_answerNine, $_answerTen, $_answerEleven, $_answerTwelve, $_answerThirteen, $_dateTime, $_studentId, $_courseId) {
         $this->id = $_id;
-        $this->questionOne = $_questionOne;
-        $this->questionTwo = $_questionTwo;
-        $this->questionThree = $_questionThree;
-        $this->questionFour = $_questionFour;
-        $this->questionFive = $_questionFive;
-        $this->questionSix = $_questionSix;
+        $this->answerOne = $_answerOne;
+        $this->answerTwo = $_answerTwo;
+        $this->answerThree = $_answerThree;
+        $this->answerFour = $_answerFour;
+        $this->answerFive = $_answerFive;
+        $this->answerSix = $_answerSix;
+        $this->answerSeven = $_answerSeven;
+        $this->answerEight = $_answerEight;
+        $this->answerNine = $_answerNine;
+        $this->answerTen = $_answerTen;
+        $this->answerEleven = $_answerEleven;
+        $this->answerTwelve = $_answerTwelve;
+        $this->answerThirteen = $_answerThirteen;
         $this->dateTime = $_dateTime;
         $this->studentId = $_studentId;
         $this->courseId = $_courseId;
@@ -30,28 +44,56 @@ class Assessment {
         return $this->id;
     }
 
-    public function getQuestionOne() {
-        return $this->questionOne;
+    public function getAnswerOne() {
+        return $this->answerOne;
     }
 
-    public function getQuestionTwo() {
-        return $this->questionTwo;
+    public function getAnswerTwo() {
+        return $this->answerTwo;
     }
 
-    public function getQuestionThree() {
-        return $this->questionThree;
+    public function getAnswerThree() {
+        return $this->answerThree;
     }
 
-    public function getQuestionFour() {
-        return $this->questionFour;
+    public function getAnswerFour() {
+        return $this->answerFour;
     }
 
-    public function getQuestionFive() {
-        return $this->questionFive;
+    public function getAnswerFive() {
+        return $this->answerFive;
     }
 
-    public function getQuestionSix() {
-        return $this->questionSix;
+    public function getAnswerSix() {
+        return $this->answerSix;
+    }
+
+    public function getAnswerSeven() {
+        return $this->answerSeven;
+    }
+
+    public function getAnswerEight() {
+        return $this->answerEight;
+    }
+
+    public function getAnswerNine() {
+        return $this->answerNine;
+    }
+
+    public function getAnswerTen() {
+        return $this->answerTen;
+    }
+
+    public function getAnswerEleven() {
+        return $this->answerEleven;
+    }
+
+    public function getAnswerTwelve() {
+        return $this->answerTwelve;
+    }
+
+    public function getAnswerThirteen() {
+        return $this->answerThirteen;
     }
 
     public function getDateTime() {
@@ -66,28 +108,56 @@ class Assessment {
         return $this->courseId;
     }
 
-    public function setQuestionOne($questionOne) {
-        $this->questionOne = $questionOne;
+    public function setAnswerOne($answerOne) {
+        $this->answerOne = $answerOne;
     }
 
-    public function setQuestionTwo($questionTwo) {
-        $this->questionTwo = $questionTwo;
+    public function setAnswerTwo($answerTwo) {
+        $this->answerTwo = $answerTwo;
     }
 
-    public function setQuestionThree($questionThree) {
-        $this->questionThree = $questionThree;
+    public function setAnswerThree($answerThree) {
+        $this->answerThree = $answerThree;
     }
 
-    public function setQuestionFour($questionFour) {
-        $this->questionFour = $questionFour;
+    public function setAnswerFour($answerFour) {
+        $this->answerFour = $answerFour;
     }
 
-    public function setQuestionFive($questionFive) {
-        $this->questionFive = $questionFive;
+    public function setAnswerFive($answerFive) {
+        $this->answerFive = $answerFive;
     }
 
-    public function setQuestionSix($questionSix) {
-        $this->questionSix = $questionSix;
+    public function setAnswerSix($answerSix) {
+        $this->answerSix = $answerSix;
+    }
+
+    public function setAnswerSeven($answerSeven) {
+        $this->answerSeven = $answerSeven;
+    }
+
+    public function setAnswerEight($answerEight) {
+        $this->answerEight = $answerEight;
+    }
+
+    public function setAnswerNine($answerNine) {
+        $this->answerNine = $answerNine;
+    }
+
+    public function setAnswerTen($answerTen) {
+        $this->answerTen = $answerTen;
+    }
+
+    public function setAnswerEleven($answerEleven) {
+        $this->answerEleven = $answerEleven;
+    }
+
+    public function setAnswerTwelve($answerTwelve) {
+        $this->answerTwelve = $answerTwelve;
+    }
+
+    public function setAnswerThirteen($answerThirteen) {
+        $this->answerThirteen = $answerThirteen;
     }
 
     public function setDateTime($dateTime) {

@@ -19,9 +19,11 @@ class LoginController {
             if ($user != null) {
                 $_SESSION['name'] = $user->getFirstName() . " " . $user->getLastName();
                 if ($user instanceof \App\Models\Student) {
+                    $_SESSION['student'] = $user;
                     require __DIR__ . '/../views/dashboard/studentdasboard.php';
                 }
                 elseif($user instanceof \App\Models\Teacher) {
+                    $_SESSION['teacher'] = $user;
                     http_response_code(404);
                 }
                 exit;

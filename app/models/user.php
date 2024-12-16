@@ -39,7 +39,9 @@ class User {
     }
 
     public function getImage() {
-        return $this->image;
+        $profilePictureBase64 = base64_encode($this->image);
+        $profilePictureSrc = 'data:image/jpeg;base64,' . $profilePictureBase64;
+        return $profilePictureSrc;
     }
 
     public function setFirstName($firstName) {

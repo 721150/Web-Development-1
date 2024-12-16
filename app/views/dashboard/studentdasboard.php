@@ -21,9 +21,12 @@ $teacher = isset($teacher) ? $teacher : 'Onbekende docent';
 <body class="d-flex vh-100 overflow-hidden">
     <div class="sidebar bg-dark text-white p-3" style="width: 250px;">
         <h2>Dashboard</h2>
-        <h5>Welkom, <?=$_SESSION['name']?>!</h5>
-        <a href="#" class="text-white d-block py-2" style="text-decoration: none;">Home</a>
-        <a href="#" class="text-white d-block py-2" style="text-decoration: none;">Vragenlijsten</a>
+        <div class="profile mb-3">
+            <img src="<?= htmlspecialchars($_SESSION['student']->getImage()); ?>" alt="Profielfoto" class="img-fluid rounded-circle" style="width: 100px; height: 100px;">
+            <h5 class="mt-2"><?=$_SESSION['name']?></h5>
+        </div>
+        <a href="/" class="text-white d-block py-2" style="text-decoration: none;">Home</a>
+        <a href="/" class="text-white d-block py-2" style="text-decoration: none;">Vragenlijsten</a>
         <a href="#" class="text-white d-block py-2" style="text-decoration: none;">Instellingen</a>
         <a href="/StudentDasboard/endSession" class="text-white d-block py-2" style="text-decoration: none;">Uitloggen</a>
     </div>
@@ -35,7 +38,7 @@ $teacher = isset($teacher) ? $teacher : 'Onbekende docent';
             ?>
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     <?= htmlspecialchars($vragenlijst); ?>
-                    <form action="/Studentdasboard/openQuestionnaire" method="post" class="d-inline">
+                    <form action="/Studentdasboard/openQuestionnaire" method="POST" class="d-inline">
                         <input type="hidden" name="course" value="<?= htmlspecialchars($course); ?>">
                         <input type="hidden" name="teacher" value="<?= htmlspecialchars($teacher); ?>">
                         <button type="submit" class="btn btn-primary btn-sm">Openen</button>

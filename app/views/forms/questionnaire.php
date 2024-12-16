@@ -22,7 +22,7 @@ $teacher = isset($teacher) ? $teacher : 'Onbekende docent';
     </div>
     <div class="content flex-grow-1 p-4 overflow-auto">
         <h2>Evaluatie Vragenlijst</h2>
-        <form>
+        <form method="POST">
             <div class="mb-3">
                 <label for="course" class="form-label">Vak</label>
                 <input type="text" class="form-control" id="course" value="<?= htmlspecialchars($course); ?>" readonly>
