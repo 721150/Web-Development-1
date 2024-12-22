@@ -1,46 +1,19 @@
 <?php
 namespace App\Views;
-
-$vragenlijsten = [
-    'Vragenlijst 1',
-    'Vragenlijst 2',
-    'Vragenlijst 3',
-    // testlijst
-];
-$course = isset($course) ? $course : 'Onbekend vak';
-$teacher = isset($teacher) ? $teacher : 'Onbekende docent';
+include __DIR__ . '/../header.php';
 ?>
-<!DOCTYPE html>
-<html lang="nl-NL">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard &ndash; Docentenrecenties</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-</head>
-<body class="d-flex vh-100 overflow-hidden">
-    <div class="sidebar bg-dark text-white p-3" style="width: 250px;">
-        <h2>Dashboard</h2>
-        <div class="profile mb-3">
-            <img src="<?= htmlspecialchars($_SESSION['student']->getImage()); ?>" alt="Profielfoto" class="img-fluid rounded-circle" style="width: 100px; height: 100px;">
-            <h5 class="mt-2"><?=$_SESSION['name']?></h5>
-        </div>
-        <a href="/" class="text-white d-block py-2" style="text-decoration: none;">Home</a>
-        <a href="/" class="text-white d-block py-2" style="text-decoration: none;">Vragenlijsten</a>
-        <a href="#" class="text-white d-block py-2" style="text-decoration: none;">Instellingen</a>
-        <a href="/StudentDasboard/endSession" class="text-white d-block py-2" style="text-decoration: none;">Uitloggen</a>
-    </div>
-    <div class="content flex-grow-1 p-4 overflow-auto">
+    <div class="flex-grow-1 p-4 overflow-auto">
         <h2>Openstaande Vragenlijsten</h2>
         <ul class="list-group">
             <?php 
-            foreach ($vragenlijsten as $index => $vragenlijst): 
+            foreach ($_SESSION['listOfQuestionnaire'] as $questionnaire): 
             ?>
                 <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <?= htmlspecialchars($vragenlijst); ?>
+                    <?= htmlspecialchars($questionnaire->getName()); ?>
                     <form action="/Studentdasboard/openQuestionnaire" method="POST" class="d-inline">
-                        <input type="hidden" name="course" value="<?= htmlspecialchars($course); ?>">
-                        <input type="hidden" name="teacher" value="<?= htmlspecialchars($teacher); ?>">
+                        <input type="hidden" name="id" value="<?= htmlspecialchars($questionnaire->getId()); ?>">
+                        <input type="hidden" name="name" value="<?= htmlspecialchars($questionnaire->getName()); ?>">
+                        <input type="hidden" name="discipline" value="<?= htmlspecialchars($questionnaire->getDiscipline()); ?>">
                         <button type="submit" class="btn btn-primary btn-sm">Openen</button>
                     </form>
                 </li>
@@ -49,5 +22,6 @@ $teacher = isset($teacher) ? $teacher : 'Onbekende docent';
             ?>
         </ul>
     </div>
-</body>
-</html>
+<?php
+include __DIR__ . '/../footer.php';
+?>

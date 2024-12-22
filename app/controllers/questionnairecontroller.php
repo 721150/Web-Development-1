@@ -10,7 +10,7 @@ class QuestionnaireController {
         }
     }
 
-    public function index($course, $teacher) {
+    public function index($course) {
         $loginController = new LoginController();
         if (!$loginController->checkLogin()) {
             $loginController->login();

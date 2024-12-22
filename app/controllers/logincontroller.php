@@ -20,7 +20,8 @@ class LoginController {
                 $_SESSION['name'] = $user->getFirstName() . " " . $user->getLastName();
                 if ($user instanceof \App\Models\Student) {
                     $_SESSION['student'] = $user;
-                    require __DIR__ . '/../views/dashboard/studentdasboard.php';
+                    $studentDashboardController = new StudentDasboardController();
+                    $studentDashboardController->index();
                 }
                 elseif($user instanceof \App\Models\Teacher) {
                     $_SESSION['teacher'] = $user;

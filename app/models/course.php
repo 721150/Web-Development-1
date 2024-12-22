@@ -4,12 +4,12 @@ namespace App\Models;
 class Course {
     private $id;
     private $name;
-    private $discription;
+    private $discipline;
     
-    public function __construct($_id, $_name, $_description) {
+    public function __construct($_id, $_name, $_discipline) {
         $this->id = $_id;
         $this->name = $_name;
-        $this->description = $_description;
+        $this->discipline = $_discipline;
     }
 
     public function getId() {
@@ -20,16 +20,16 @@ class Course {
         return $this->name;
     }
 
-    public function getDescription() {
-        return $this->description;
+    public function getDiscipline() {
+        return $this->discipline;
     }
 
     public function setName($name) {
         $this->name = $name;
     }
 
-    public function setDescription($description) {
-        $this->description = $description;
+    public function setDiscipline($discipline) {
+        $this->discipline = $discipline;
     }
 }
 ?>
