@@ -31,9 +31,13 @@ class StudentDasboardController {
     }
 
     public function openQuestionnaire() {
+        if (isset($_POST['id'])) {
         $course = new Course($_POST['id'], $_POST['name'], $_POST['discipline']);
+        $_SESSION['course'] = $course;
         $questionnaireController = new QuestionnaireController();
-        $questionnaireController->index($course);
+        $questionnaireController->index();
+        exit;
+        }
     }
 
     private function loadQuestionnaire() {

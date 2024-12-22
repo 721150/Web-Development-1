@@ -19,4 +19,5 @@
             <a href="/StudentDasboard/endSession" class="text-white px-3" style="text-decoration: none;">Uitloggen</a>
         </div>
     </div>
-    <div class="container">
+    <div class="flex-grow-1 p-4 overflow-auto">
+        <div class="container">
