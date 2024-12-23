@@ -4,10 +4,13 @@ namespace App\Controllers;
 use App\Models\Assessment;
 
 class QuestionnaireController {
+    private $QuestionnaireService;
+    
     function __construct() {
         if (session_status() == PHP_SESSION_NONE) {
             session_start();
         }
+        $this->QuestionnaireService = new \App\Services\QuestionnaireService();
     }
 
     public function index() {
@@ -15,22 +18,22 @@ class QuestionnaireController {
         if (!$loginController->checkLogin()) {
             $loginController->login();
         } else {
-            if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['overallQuality'])) {
+            if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['courseId'])) {
                 try {
                     $courseId = htmlspecialchars($_POST['courseId']);
-                    $anwserOne = htmlspecialchars($_POST['overallQuality']);
-                    $anwserTwo = htmlspecialchars($_POST['teacherSatisfaction']);
-                    $anwserThree = htmlspecialchars($_POST['teacherClarity']);
-                    $anwserFour = htmlspecialchars($_POST['teacherResponse']);
-                    $anwserFive = htmlspecialchars($_POST['teacherAccessibility']);
-                    $anwserSix = htmlspecialchars($_POST['teacherMotivation']);
-                    $anwserSeven = htmlspecialchars($_POST['lessonRelevance']);
-                    $anwserEight = htmlspecialchars($_POST['lessonGoals']);
-                    $anwserNine = htmlspecialchars($_POST['lessonChallenge']);
-                    $anwserTen = htmlspecialchars($_POST['lessonInteractivity']);
-                    $anwserEleven = htmlspecialchars($_POST['teacherEngagement']);
-                    $anwserTwelve = htmlspecialchars($_POST['learningMaterials']);
-                    $anwserThirteen = htmlspecialchars($_POST['lessonOrganization']);
+                    $answerOne = htmlspecialchars($_POST['overallQuality']);
+                    $answerTwo = htmlspecialchars($_POST['teacherSatisfaction']);
+                    $answerThree = htmlspecialchars($_POST['teacherClarity']);
+                    $answerFour = htmlspecialchars($_POST['teacherResponse']);
+                    $answerFive = htmlspecialchars($_POST['teacherAccessibility']);
+                    $answerSix = htmlspecialchars($_POST['teacherMotivation']);
+                    $answerSeven = htmlspecialchars($_POST['lessonRelevance']);
+                    $answerEight = htmlspecialchars($_POST['lessonGoals']);
+                    $answerNine = htmlspecialchars($_POST['lessonChallenge']);
+                    $answerTen = htmlspecialchars($_POST['lessonInteractivity']);
+                    $answerEleven = htmlspecialchars($_POST['teacherEngagement']);
+                    $answerTwelve = htmlspecialchars($_POST['learningMaterials']);
+                    $answerThirteen = htmlspecialchars($_POST['lessonOrganization']);
 
                     $assessment = new Assessment(
                         null,
@@ -51,12 +54,12 @@ class QuestionnaireController {
                         $_SESSION['student']->getStudentId(),
                         $courseId
                     );
+                    $this->QuestionnaireService->insert($assessment);
                 }
                 catch (Exception $e) {
-                    //http_response_code(422);
+                    http_response_code(422);
                 };
-                $studentDashboardController = new StudentDasboardController();
-                $studentDashboardController->index();
+                header('Location: /StudentDasboard');
             }
             $selectedCourse = $_SESSION['course'];
             require __DIR__ . '/../views/forms/questionnaire.php';

@@ -4,13 +4,13 @@ namespace App\Controllers;
 use App\Models\Course;
 
 class StudentDasboardController {
-    private $openQuestionnaireService;
+    private $QuestionnaireService;
 
     function __construct() {
         if (session_status() == PHP_SESSION_NONE) {
             session_start();
         }
-        $this->openQuestionnaireService = new \App\Services\OpenQuestionnaireService();
+        $this->QuestionnaireService = new \App\Services\QuestionnaireService();
     }
 
     public function index() {
@@ -31,17 +31,14 @@ class StudentDasboardController {
     }
 
     public function openQuestionnaire() {
-        if (isset($_POST['id'])) {
+        
         $course = new Course($_POST['id'], $_POST['name'], $_POST['discipline']);
         $_SESSION['course'] = $course;
-        $questionnaireController = new QuestionnaireController();
-        $questionnaireController->index();
-        exit;
-        }
+        header('Location: /Questionnaire');
     }
 
     private function loadQuestionnaire() {
-        $listOfQuestionnaire = $this->openQuestionnaireService->loadOpenQusetionnaireByStudent($_SESSION['student']);
+        $listOfQuestionnaire = $this->QuestionnaireService->loadOpenQusetionnaireByStudent($_SESSION['student']);
         return $listOfQuestionnaire;
     }
 }

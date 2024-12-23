@@ -3,8 +3,9 @@ namespace App\Repositories;
 
 use PDO;
 use App\Models\Assessment;
+use App\Models\Course;
 
-class LoginRepository extends Repository {
+class QuestionnaireRepository extends Repository {
     
     function __construct() {
         parent::__construct();
@@ -14,33 +15,64 @@ class LoginRepository extends Repository {
         
     }
 
-    public function insert() {
-        $sql = "INSERT INTO `Assessment` (answer_one, answer_two, answer_three, answer_four, answer_five, answer_six, answer_seven, answer_eight, answer_nine, answer_ten, answer_eleven, answer_twelve, answer_thirteen, student_id, course_id) 
+    public function insert($assessment) {
+        $sql = "INSERT INTO `Assessment` (answerOne, answerTwo, answerThree, answerFour, answerFive, answerSix, answerSeven, answerEight, answerNine, answerTen, answerEleven, answerTwelve, answerThirteen, studentId, courceId) 
         VALUES (:answerOne, :answerTwo, :answerThree, :answerFour, :answerFive, :answerSix, :answerSeven, :answerEight, :answerNine, :answerTen, :answerEleven, :answerTwelve, :answerThirteen, :studentId, :courseId)";
 
         $stmt = $this->connection->prepare($sql);
 
-        $stmt->bindParam(':answerOne', $assessment->getAnswerOne());
-        $stmt->bindParam(':answerTwo', $assessment->getAnswerTwo());
-        $stmt->bindParam(':answerThree', $assessment->getAnswerThree());
-        $stmt->bindParam(':answerFour', $assessment->getAnswerFour());
-        $stmt->bindParam(':answerFive', $assessment->getAnswerFive());
-        $stmt->bindParam(':answerSix', $assessment->getAnswerSix());
-        $stmt->bindParam(':answerSeven', $assessment->getAnswerSeven());
-        $stmt->bindParam(':answerEight', $assessment->getAnswerEight());
-        $stmt->bindParam(':answerNine', $assessment->getAnswerNine());
-        $stmt->bindParam(':answerTen', $assessment->getAnswerTen());
-        $stmt->bindParam(':answerEleven', $assessment->getAnswerEleven());
-        $stmt->bindParam(':answerTwelve', $assessment->getAnswerTwelve());
-        $stmt->bindParam(':answerThirteen', $assessment->getAnswerThirteen());
-        $stmt->bindParam(':studentId', $assessment->getStudentId());
-        $stmt->bindParam(':courseId', $assessment->getCourseId());
+        $answerOne = $assessment->getAnswerOne();
+        $answerTwo = $assessment->getAnswerTwo();
+        $answerThree = $assessment->getAnswerThree();
+        $answerFour = $assessment->getAnswerFour();
+        $answerFive = $assessment->getAnswerFive();
+        $answerSix = $assessment->getAnswerSix();
+        $answerSeven = $assessment->getAnswerSeven();
+        $answerEight = $assessment->getAnswerEight();
+        $answerNine = $assessment->getAnswerNine();
+        $answerTen = $assessment->getAnswerTen();
+        $answerEleven = $assessment->getAnswerEleven();
+        $answerTwelve = $assessment->getAnswerTwelve();
+        $answerThirteen = $assessment->getAnswerThirteen();
+        $studentId = $assessment->getStudentId();
+        $courseId = $assessment->getCourseId();
+
+        $stmt->bindParam(':answerOne', $answerOne);
+        $stmt->bindParam(':answerTwo', $answerTwo);
+        $stmt->bindParam(':answerThree', $answerThree);
+        $stmt->bindParam(':answerFour', $answerFour);
+        $stmt->bindParam(':answerFive', $answerFive);
+        $stmt->bindParam(':answerSix', $answerSix);
+        $stmt->bindParam(':answerSeven', $answerSeven);
+        $stmt->bindParam(':answerEight', $answerEight);
+        $stmt->bindParam(':answerNine', $answerNine);
+        $stmt->bindParam(':answerTen', $answerTen);
+        $stmt->bindParam(':answerEleven', $answerEleven);
+        $stmt->bindParam(':answerTwelve', $answerTwelve);
+        $stmt->bindParam(':answerThirteen', $answerThirteen);
+        $stmt->bindParam(':studentId', $studentId);
+        $stmt->bindParam(':courseId', $courseId);
 
         $stmt->execute();
     }
 
     public function getById($id) {
         
+    }
+
+    public function loadOpenQusetionnaireByStudent($student) {
+        $listOfQuestionnaire = [];
+        try {
+            $stmt = $this->connection->prepare("SELECT Cource.id, Cource.name, Cource.discipline FROM `StudentCource` JOIN `Cource` ON Cource.id = StudentCource.courceId LEFT JOIN `Assessment` ON StudentCource.studentId = Assessment.studentId AND StudentCource.courceId = Assessment.courceId WHERE StudentCource.studentId = :studentId AND Assessment.id IS NULL");
+            $stmt->execute([':studentId' => $student->getStudentId()]);
+
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $questionnaire = new Course($row['id'], $row['name'], $row['discipline']);
+                $listOfQuestionnaire[] = $questionnaire;
+            }
+        } catch (Exception $e) {}
+
+        return $listOfQuestionnaire;
     }
 }
 ?>

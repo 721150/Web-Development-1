@@ -15,6 +15,8 @@
         <div>
             <a href="/" class="text-white px-3" style="text-decoration: none;">Home</a>
             <a href="/" class="text-white px-3" style="text-decoration: none;">Vragenlijsten</a>
+            <a href="/" class="text-white px-3" style="text-decoration: none;">Berichten</a>
+            <a href="/" class="text-white px-3" style="text-decoration: none;">Resultaten</a>
             <a href="#" class="text-white px-3" style="text-decoration: none;">Instellingen</a>
             <a href="/StudentDasboard/endSession" class="text-white px-3" style="text-decoration: none;">Uitloggen</a>
         </div>
