@@ -18,7 +18,7 @@ class ManageProfileRepository extends Repository {
         $lastName = $student->getLastName();
         $email = $student->getEmailAddress();
         $password = $student->getPassword();
-        $image = $student->getImage();
+        $image = $student->getImageString();
         $id = $student->getId();
 
         $stmtUser->bindParam(':firstName', $firstName);
