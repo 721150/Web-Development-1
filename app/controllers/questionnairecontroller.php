@@ -65,11 +65,5 @@ class QuestionnaireController {
             require __DIR__ . '/../views/forms/questionnaire.php';
         }
     }
-
-    public function endSession() {
-        $endingSession = new EndingSession();
-        $endingSession->end_session();
-        exit;
-    }
 }
 ?>

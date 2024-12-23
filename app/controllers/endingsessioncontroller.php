@@ -1,14 +1,14 @@
 <?php
 namespace App\Controllers;
 
-class EndingSession {
+class EndingSessionController {
     function __construct() {
         if (session_status() == PHP_SESSION_NONE) {
             session_start();
         }
     }
 
-    public function end_session() {
+    public function endSession() {
         session_unset();
         header('Location: /');
         exit;

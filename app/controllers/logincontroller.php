@@ -17,7 +17,7 @@ class LoginController {
             $password = htmlspecialchars($_POST['password']);
             $user = $this->loginService->validLogin($email, $password);
             if ($user != null) {
-                $_SESSION['name'] = $user->getFirstName() . " " . $user->getLastName();
+                $_SESSION['name'] = $user->getFullName();
                 if ($user instanceof \App\Models\Student) {
                     $_SESSION['student'] = $user;
                     $studentDashboardController = new StudentDasboardController();

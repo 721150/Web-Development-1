@@ -44,6 +44,10 @@ class User {
         return $profilePictureSrc;
     }
 
+    public function getFullName() {
+        return $this->firstName . " " . $this->lastName;
+    }
+
     public function setFirstName($firstName) {
         $this->firstName = $firstName;
     }
@@ -61,7 +65,10 @@ class User {
     }
 
     public function setImage($image) {
-        $this->image = $image;
+        if (is_array($image) && isset($image['tmp_name']) && !empty($image['tmp_name'])) {
+            $imageData = file_get_contents($image['tmp_name']);
+            $this->image = $imageData;
+        }
     }
 }
 ?>

@@ -14,5 +14,13 @@ class Student extends User {
     public function getStudentId() {
         return $this->studentId;
     }
+
+    public function getAbout() {
+        return $this->about;
+    }
+
+    public function setAbout($about) {
+        $this->about = $about;
+    }
 }
 ?>

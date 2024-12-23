@@ -24,14 +24,7 @@ class StudentDasboardController {
         }
     }
 
-    public function endSession() {
-        $endingSession = new EndingSession();
-        $endingSession->end_session();
-        exit;
-    }
-
     public function openQuestionnaire() {
-        
         $course = new Course($_POST['id'], $_POST['name'], $_POST['discipline']);
         $_SESSION['course'] = $course;
         header('Location: /Questionnaire');
