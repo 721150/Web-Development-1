@@ -40,7 +40,7 @@ include __DIR__ . '/../header.php';
             cource : document.getElementById('course').value,
             subject : document.getElementById('subject').value,
             message : document.getElementById('message').value,
-            photo : document.getElementById('photo').value
+            photo : document.getElementById('photo').files[0]
         };
 
         fetch('/api/massageboard', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(message)})
@@ -51,6 +51,7 @@ include __DIR__ . '/../header.php';
         fetch('/api/massageboard')
             .then(result => result.json())
             .then(data => {
+                console.log(data);
                 const messageContainer = document.getElementById('messages');
 
             data.forEach(element => {
@@ -69,7 +70,8 @@ include __DIR__ . '/../header.php';
                 content.innerText = element.content;
                 listItem.appendChild(content);
 
-                if (element.photo) {
+                if (element.image) {
+                    console.log('Image found:', element.image);
                     const photo = document.createElement("img");
                     photo.src = element.image;
                     photo.alt = "Foto";

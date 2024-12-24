@@ -25,6 +25,9 @@ class Message implements JsonSerializable {
     public function jsonSerialize(): array
     {
         $var = get_object_vars($this);
+        if ($this->image) {
+            $var['image'] = 'data:image/jpeg;base64,' . base64_encode($this->image);
+        }
         return $var;
     }
 
