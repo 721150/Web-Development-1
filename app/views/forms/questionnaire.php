@@ -140,7 +140,7 @@ include __DIR__ . '/../header.php';
                 <option value="5">Zeer goed</option>
             </select>
         </div>
-        <button type="submit" class="btn btn-primary">Verzenden</button>
+        <button type="submit" class="btn btn-success">Verzenden</button>
     </form>
 </div>
 <?php

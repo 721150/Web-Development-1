@@ -31,7 +31,7 @@ include __DIR__ . '/../header.php';
         <label for="about" class="form-label">Over</label>
         <textarea class="form-control" id="about" name="about" rows="3"><?= htmlspecialchars($_SESSION['student']->getAbout()); ?></textarea>
     </div>
-    <button type="submit" class="btn btn-primary">Opslaan</button>
+    <button type="submit" class="btn btn-success">Opslaan</button>
     <a href="/" class="btn btn-danger">Verwijderen</a>
 </form>
 <?php

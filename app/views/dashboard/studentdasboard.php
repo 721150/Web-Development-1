@@ -14,7 +14,7 @@ include __DIR__ . '/../header.php';
                     <input type="hidden" name="id" value="<?= htmlspecialchars($questionnaire->getId()); ?>">
                     <input type="hidden" name="name" value="<?= htmlspecialchars($questionnaire->getName()); ?>">
                     <input type="hidden" name="discipline" value="<?= htmlspecialchars($questionnaire->getDiscipline()); ?>">
-                    <button type="submit" class="btn btn-primary btn-sm">Openen</button>
+                    <button type="submit" class="btn btn-success btn-sm">Openen</button>
                 </form>
             </li>
         <?php 

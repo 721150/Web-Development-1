@@ -29,7 +29,7 @@ include __DIR__ . '/../header.php';
             <label for="photo" class="form-label">Foto</label>
             <input type="file" class="form-control" id="photo" name="photo" accept="image/*">
         </div>
-        <button type="submit" onclick="postMessage();" class="btn btn-primary">Plaatsen</button>
+        <button type="submit" onclick="postMessage();" class="btn btn-success">Plaatsen</button>
     </form>
     <h3>Berichten</h3>
     <ul id="messages" class="list-group"></ul>
