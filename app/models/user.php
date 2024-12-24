@@ -39,7 +39,10 @@ class User {
     }
 
     public function getImage() {
+        if ($this->image !== null) {
         return 'data:image/jpeg;base64,' . base64_encode($this->image);
+        }
+        return null;
     }
 
     public function getImageString() {

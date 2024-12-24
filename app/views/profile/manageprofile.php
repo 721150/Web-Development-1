@@ -29,7 +29,7 @@ include __DIR__ . '/../header.php';
     </div>
     <div class="mb-3">
         <label for="about" class="form-label">Over</label>
-        <textarea class="form-control" id="about" name="about" rows="3"><?= htmlspecialchars($_SESSION['student']->getAbout()); ?></textarea>
+        <textarea class="form-control" id="about" name="about" rows="3"><?= htmlspecialchars($_SESSION['student']->getAbout() ?? ''); ?></textarea>
     </div>
     <button type="submit" class="btn btn-success">Opslaan</button>
     <a href="/ManageProfile/deleteProfile" class="btn btn-danger">Verwijderen</a>

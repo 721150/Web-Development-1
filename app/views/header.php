@@ -9,7 +9,11 @@
 <body class="d-flex flex-column vh-100 overflow-hidden">
     <div class="bg-dark text-white p-3 d-flex justify-content-between align-items-center">
         <div class="d-flex align-items-center">
-            <img src="<?= htmlspecialchars($_SESSION['student']->getImage()); ?>" alt="Profielfoto" class="rounded-circle" style="width: 50px; height: 50px;">
+        <?php
+            $image = $_SESSION['student']->getImage();
+            $defaultImage = '/img/profile.png';
+            ?>
+            <img src="<?= htmlspecialchars($image ? $image : $defaultImage); ?>" alt="Profielfoto" class="rounded-circle" style="width: 50px; height: 50px;">
             <h5 class="ms-2 mb-0"><?=$_SESSION['student']->getFullName()?></h5>
         </div>
         <div>
