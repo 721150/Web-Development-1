@@ -40,5 +40,18 @@ class MassageRepository extends Repository {
 
         return $messages;
     }
+
+    public function insert($message) {   
+        try {
+            $stmt = $this->connection->prepare("INSERT INTO `Message` (`description`, `content`, `time`, `courceId`, `studentId`, `image`) VALUES (:description, :content, current_timestamp(), :courseId, :studentId, :image)");
+            $stmt->execute([
+                ':description' => $message->getDescription(),
+                ':content' => $message->getContent(),
+                ':courseId' => $message->getCourseId(),
+                ':studentId' => $message->getStudentId(),
+                ':image' => $message->getImageString()
+            ]);
+        } catch (Exception $e) {}    
+    }
 }
 ?>

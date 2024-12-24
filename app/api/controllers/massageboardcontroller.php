@@ -23,7 +23,16 @@ class MassageBoardController {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $messageJSON = file_get_contents('php://input');
             $messageData = json_decode($messageJSON, true);
-            $message = new Message(null, $messageData['subject'], $messageData['message'], null, $_SESSION['student']->getStudentId(), $messageData['course'], $messageData['photo']);
+
+            if (isset($messageData['photo'])) {
+            $base64Image = $messageData['photo'];
+            $imageData = base64_decode($base64Image);
+            }
+            else {
+                $imageData = null;
+            }
+
+            $message = new Message(null, $messageData['subject'], $messageData['message'], null, $_SESSION['student']->getStudentId(), $messageData['course'], $imageData);
             $this->MassageService->insert($message);
         }
     }

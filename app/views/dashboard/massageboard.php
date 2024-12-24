@@ -36,15 +36,57 @@ include __DIR__ . '/../header.php';
 </div>
 <script>
     function postMessage() {
-        let message = { 
-            cource : document.getElementById('course').value,
-            subject : document.getElementById('subject').value,
-            message : document.getElementById('message').value,
-            photo : document.getElementById('photo').files[0]
+        const fileInput = document.getElementById('photo');
+        const file = fileInput.files[0];
+
+        if (file) {
+            const reader = new FileReader();
+
+            reader.onloadend = function() {
+                const base64String = reader.result.replace("data:", "").replace(/^.+,/, "");
+
+                let message = { 
+                    course: document.getElementById('course').value,
+                    subject: document.getElementById('subject').value,
+                    message: document.getElementById('message').value,
+                    photo: base64String
+                };
+
+                fetch('/api/massageboard', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(message)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    loadMessages();
+                })
+                .catch(error => console.log(error));
+            };
+
+            reader.readAsDataURL(file);
+        } else {
+            let message = { 
+                course: document.getElementById('course').value,
+                subject: document.getElementById('subject').value,
+                message: document.getElementById('message').value
+            };
+
+            fetch('/api/massageboard', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(message)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                loadMessages();
+            })
+            .catch(error => console.log(error));
         };
 
-        fetch('/api/massageboard', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(message)})
-        .catch(error => console.log(error));
+        reader.readAsDataURL(file);
     }
 
     function loadMassages() {

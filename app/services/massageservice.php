@@ -11,5 +11,10 @@ class MassageService {
         $reposotory = new \App\Repositories\MassageRepository();
         return $reposotory->getAll();
     }
+
+    public function insert($message) {
+        $reposotory = new \App\Repositories\MassageRepository();
+        $reposotory->insert($message);
+    }
 }
 ?>
