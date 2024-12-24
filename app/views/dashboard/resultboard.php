@@ -26,7 +26,7 @@ include __DIR__ . '/../header.php';
 <div>
     <h2>Geplaatste Berichten</h2>
     <ul id="messages" class="list-group">
-        <?php foreach ($_SESSION['messages'] as $message): ?>
+        <?php foreach (array_reverse($_SESSION['messages']) as $message): ?>
             <li class="list-group-item">
                 <strong><?= htmlspecialchars($message->getCourseId()); ?></strong> - <?= htmlspecialchars($message->getDescription()); ?>
                 <p><?= htmlspecialchars($message->getContent()); ?></p>

@@ -96,7 +96,7 @@ include __DIR__ . '/../header.php';
                 console.log(data);
                 const messageContainer = document.getElementById('messages');
 
-            data.forEach(element => {
+            data.reverse().forEach(element => {
                 const listItem = document.createElement("li");
                 listItem.className = "list-group-item";
 
