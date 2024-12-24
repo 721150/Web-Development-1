@@ -29,11 +29,11 @@ class MassageRepository extends Repository {
     public function getAll() {
         $messages = [];
         try {
-            $stmt = $this->connection->prepare("SELECT `id`, `description`, `content`, `time`, `courceId`, `studentId`, `image` FROM `Message`");
+            $stmt = $this->connection->prepare("SELECT Message.id, description, content, time, name, studentId, image FROM `Message` JOIN `Cource` ON Cource.id = Message.courceId ORDER BY time DESC");
             $stmt->execute();
 
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                $message = new Message($row['id'], $row['description'], $row['content'], $row['time'], $row['studentId'], $row['courceId'], $row['image']);
+                $message = new Message($row['id'], $row['description'], $row['content'], $row['time'], $row['studentId'], $row['name'], $row['image']);
                 $messages[] = $message;
             }
         } catch (Exception $e) {}

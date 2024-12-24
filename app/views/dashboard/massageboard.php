@@ -96,13 +96,16 @@ include __DIR__ . '/../header.php';
                 console.log(data);
                 const messageContainer = document.getElementById('messages');
 
-            data.reverse().forEach(element => {
+            data.forEach(element => {
                 const listItem = document.createElement("li");
                 listItem.className = "list-group-item";
 
                 const courseName = document.createElement("strong");
                 courseName.innerText = element.courseId;
                 listItem.appendChild(courseName);
+
+                const lineBreak = document.createElement("br");
+                listItem.appendChild(lineBreak);
 
                 const subject = document.createElement("strong");
                 subject.innerText = element.description;
