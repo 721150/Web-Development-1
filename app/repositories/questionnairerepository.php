@@ -12,7 +12,28 @@ class QuestionnaireRepository extends Repository {
     }
 
     public function getAll() {
-        
+        $sql = "SELECT c.id, c.name, AVG(
+            (a.answerOne + a.answerTwo + a.answerThree + a.answerFour + a.answerFive +
+             a.answerSix + a.answerSeven + a.answerEight + a.answerNine + a.answerTen +
+             a.answerEleven + a.answerTwelve + a.answerThirteen) / 13
+        ) as average_score
+        FROM Cource c
+        JOIN Assessment a ON c.id = a.courceId
+        GROUP BY c.id, c.name";
+
+        $stmt = $this->connection->prepare($sql);
+        $stmt->execute();
+
+        $results = [];
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $results[] = [
+                'id' => $row['id'],
+                'name' => $row['name'],
+                'score' => round($row['average_score'], 2)
+            ];
+        }
+
+        return $results;
     }
 
     public function insert($assessment) {

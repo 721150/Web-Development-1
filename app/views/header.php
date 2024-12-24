@@ -16,7 +16,7 @@
             <a href="/" class="text-white px-3" style="text-decoration: none;">Home</a>
             <a href="/" class="text-white px-3" style="text-decoration: none;">Vragenlijsten</a>
             <a href="/Massageboard" class="text-white px-3" style="text-decoration: none;">Berichten</a>
-            <a href="/" class="text-white px-3" style="text-decoration: none;">Resultaten</a>
+            <a href="/ResultBoard" class="text-white px-3" style="text-decoration: none;">Resultaten</a>
             <a href="/ManageProfile" class="text-white px-3" style="text-decoration: none;">Instellingen</a>
             <a href="/EndingSession/endSession" class="text-white px-3" style="text-decoration: none;">Uitloggen</a>
         </div>
