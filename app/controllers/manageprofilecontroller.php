@@ -43,5 +43,11 @@ class ManageProfileController {
             require __DIR__ . '/../views/profile/manageprofile.php';
         }
     }
+
+    public function deleteProfile() {
+        $this->manageprofileserver->deleteProfile($_SESSION['student']);
+        $endSession = new EndingSessionController();
+        $endSession->endSession();
+    }
 }
 ?>

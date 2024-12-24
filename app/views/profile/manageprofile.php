@@ -32,7 +32,7 @@ include __DIR__ . '/../header.php';
         <textarea class="form-control" id="about" name="about" rows="3"><?= htmlspecialchars($_SESSION['student']->getAbout()); ?></textarea>
     </div>
     <button type="submit" class="btn btn-success">Opslaan</button>
-    <a href="/" class="btn btn-danger">Verwijderen</a>
+    <a href="/ManageProfile/deleteProfile" class="btn btn-danger">Verwijderen</a>
 </form>
 <?php
 include __DIR__ . '/../footer.php';

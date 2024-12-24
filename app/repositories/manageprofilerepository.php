@@ -11,8 +11,7 @@ class ManageProfileRepository extends Repository {
     }
 
     public function updateStudent($student) {
-        $sqlUser = "UPDATE `User` SET firstName = :firstName, lastName = :lastName, emailAddress = :email, password = :password, image = :image WHERE id = :id";
-        $stmtUser = $this->connection->prepare($sqlUser);
+        $stmtUser = $this->connection->prepare("UPDATE `User` SET firstName = :firstName, lastName = :lastName, emailAddress = :email, password = :password, image = :image WHERE id = :id");
 
         $firstName = $student->getFirstName();
         $lastName = $student->getLastName();
@@ -30,8 +29,7 @@ class ManageProfileRepository extends Repository {
 
         $stmtUser->execute();
 
-        $sqlStudent = "UPDATE `Student` SET about = :about WHERE studentId = :id";
-        $stmtStudent = $this->connection->prepare($sqlStudent);
+        $stmtStudent = $this->connection->prepare("UPDATE `Student` SET about = :about WHERE studentId = :id");
 
         $about = $student->getAbout();
 
@@ -39,6 +37,16 @@ class ManageProfileRepository extends Repository {
         $stmtStudent->bindParam(':id', $id);
 
         $stmtStudent->execute();
+    }
+
+    public function deleteProfile($student) {
+        $stmtUser = $this->connection->prepare("DELETE FROM `User` WHERE id = :id");
+        
+        $id = $student->getId();
+        
+        $stmtUser->bindParam(':id', $id);
+
+        $stmtUser->execute();
     }
 }
 ?>

@@ -14,7 +14,7 @@ class LoginRepository extends Repository {
     public function validLogin($email, $password) {
         $user = null;
         try {
-            $stmt = $this->connection->prepare("SELECT * FROM `Student` JOIN `User` ON User.id = Student.studentId WHERE emailAddress = :email AND password = :password");
+            $stmt = $this->connection->prepare("SELECT User.id, firstname, lastname, emailAddress, password, image, Student.id AS studentId, about FROM `Student` JOIN `User` ON User.id = Student.studentId WHERE emailAddress = :email AND password = :password");
             $stmt->execute([':email' => $email,
                             ':password' => $password]);
 
