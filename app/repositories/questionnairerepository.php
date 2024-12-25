@@ -12,16 +12,7 @@ class QuestionnaireRepository extends Repository {
     }
 
     public function getAll() {
-        $sql = "SELECT c.id, c.name, AVG(
-            (a.answerOne + a.answerTwo + a.answerThree + a.answerFour + a.answerFive +
-             a.answerSix + a.answerSeven + a.answerEight + a.answerNine + a.answerTen +
-             a.answerEleven + a.answerTwelve + a.answerThirteen) / 13
-        ) as average_score
-        FROM Cource c
-        JOIN Assessment a ON c.id = a.courceId
-        GROUP BY c.id, c.name";
-
-        $stmt = $this->connection->prepare($sql);
+        $stmt = $this->connection->prepare("SELECT c.id, c.name, AVG((a.answerOne + a.answerTwo + a.answerThree + a.answerFour + a.answerFive +a.answerSix + a.answerSeven + a.answerEight + a.answerNine + a.answerTen +a.answerEleven + a.answerTwelve + a.answerThirteen) / 13) as average_score, a.time FROM Cource c JOIN Assessment a ON c.id = a.courceId GROUP BY c.id, c.name ORDER BY a.time DESC");
         $stmt->execute();
 
         $results = [];
@@ -29,7 +20,8 @@ class QuestionnaireRepository extends Repository {
             $results[] = [
                 'id' => $row['id'],
                 'name' => $row['name'],
-                'score' => round($row['average_score'], 2)
+                'score' => round($row['average_score'], 2),
+                'date' => $row['time']
             ];
         }
 
