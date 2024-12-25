@@ -14,29 +14,27 @@ class LoginRepository extends Repository {
     public function validLogin($email, $password) {
         $user = null;
         try {
-            $stmt = $this->connection->prepare("SELECT User.id, firstname, lastname, emailAddress, password, image, Student.id AS studentId, about FROM `Student` JOIN `User` ON User.id = Student.studentId WHERE emailAddress = :email AND password = :password");
-            $stmt->execute([':email' => $email,
-                            ':password' => $password]);
-
+            $stmt = $this->connection->prepare("SELECT User.id, firstname, lastname, emailAddress, password, image, Student.id AS studentId, about FROM `Student` JOIN `User` ON User.id = Student.studentId WHERE emailAddress = :email");
+            $stmt->execute([':email' => $email]);
+    
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
-
-            if ($result) {
-                $user = new Student($result['id'], $result['firstname'], $result['lastname'], $result['emailAddress'], $result['password'], $result['image'], $result['studentId'], $result['about']);
+    
+            if ($result && password_verify($password, $result['password'])) {
+                $user = new Student($result['id'], $result['firstname'], $result['lastname'], $result['emailAddress'], null, $result['image'], $result['studentId'], $result['about']);
             }
-
+    
             if ($user == null) {
-                $stmt = $this->connection->prepare("SELECT * FROM `Teacher` JOIN `User` ON User.id = Teacher.teacherId WHERE emailAddress = :email AND password = :password");
-                $stmt->execute([':email' => $email,
-                                ':password' => $password]);
-
+                $stmt = $this->connection->prepare("SELECT User.id, firstname, lastname, emailAddress, password, image, Teacher.id AS teacherId FROM `Teacher` JOIN `User` ON User.id = Teacher.teacherId WHERE emailAddress = :email");
+                $stmt->execute([':email' => $email]);
+    
                 $result = $stmt->fetch(PDO::FETCH_ASSOC);
-
-                if ($result) {
-                    $user = new Teacher($result['id'], $result['firstname'], $result['lastname'], $result['emailAddress'], $result['password'], $result['image'], $result['teacherId']);
+    
+                if ($result && password_verify($password, $result['password'])) {
+                    $user = new Teacher($result['id'], $result['firstname'], $result['lastname'], $result['emailAddress'], null, $result['image'], $result['teacherId']);
                 }
             }
         } catch (Exception $e) {}
-
+    
         return $user;
     }
 }

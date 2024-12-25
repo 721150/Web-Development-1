@@ -17,8 +17,8 @@ include __DIR__ . '/../header.php';
         <input type="email" class="form-control" id="email" name="email" value="<?= htmlspecialchars($_SESSION['student']->getEmailAddress()); ?>" required>
     </div>
     <div class="mb-3">
-        <label for="password" class="form-label">Wachtwoord</label>
-        <input type="password" class="form-control" id="password" name="password" value="<?= htmlspecialchars($_SESSION['student']->getPassword()); ?>" required>
+        <label for="password" class="form-label">Nieuw wachtwoord</label>
+        <input type="password" class="form-control" id="password" name="password">
     </div>
     <div class="mb-3">
         <label for="image" class="form-label">Profielfoto</label>
