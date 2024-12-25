@@ -70,7 +70,33 @@ class QuestionnaireRepository extends Repository {
     }
 
     public function getById($id) {
-        
+        $stmt = $this->connection->prepare("SELECT c.id, c.name, AVG(a.answerOne) as avg_answer_one, AVG(a.answerTwo) as avg_answer_two, AVG(a.answerThree) as avg_answer_three, AVG(a.answerFour) as avg_answer_four, AVG(a.answerFive) as avg_answer_five, AVG(a.answerSix) as avg_answer_six, AVG(a.answerSeven) as avg_answer_seven, AVG(a.answerEight) as avg_answer_eight, AVG(a.answerNine) as avg_answer_nine, AVG(a.answerTen) as avg_answer_ten, AVG(a.answerEleven) as avg_answer_eleven, AVG(a.answerTwelve) as avg_answer_twelve, AVG(a.answerThirteen) as avg_answer_thirteen, a.time FROM Cource c JOIN Assessment a ON c.id = a.courceId WHERE c.id = :id GROUP BY c.id");
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+    
+        $results = [];
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $results[] = [
+                'id' => $row['id'],
+                'name' => $row['name'],
+                'avg_answer_one' => round($row['avg_answer_one'], 2),
+                'avg_answer_two' => round($row['avg_answer_two'], 2),
+                'avg_answer_three' => round($row['avg_answer_three'], 2),
+                'avg_answer_four' => round($row['avg_answer_four'], 2),
+                'avg_answer_five' => round($row['avg_answer_five'], 2),
+                'avg_answer_six' => round($row['avg_answer_six'], 2),
+                'avg_answer_seven' => round($row['avg_answer_seven'], 2),
+                'avg_answer_eight' => round($row['avg_answer_eight'], 2),
+                'avg_answer_nine' => round($row['avg_answer_nine'], 2),
+                'avg_answer_ten' => round($row['avg_answer_ten'], 2),
+                'avg_answer_eleven' => round($row['avg_answer_eleven'], 2),
+                'avg_answer_twelve' => round($row['avg_answer_twelve'], 2),
+                'avg_answer_thirteen' => round($row['avg_answer_thirteen'], 2),
+                'date' => $row['time']
+            ];
+        }
+    
+        return $results;
     }
 
     public function loadOpenQusetionnaireByStudent($student) {

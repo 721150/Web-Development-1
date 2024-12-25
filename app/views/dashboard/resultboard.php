@@ -5,6 +5,10 @@ include __DIR__ . '/../header.php';
 <div class="mb-4">
     <h2>Resultaten van de Vragenlijsten</h2>
     <div class="mb-3">
+        <label for="searchCourse" class="form-label">Zoek op cursus:</label>
+        <input type="text" id="searchCourse" class="form-control" placeholder="Voer cursusnaam in">
+    </div>
+    <div class="mb-3">
         <label for="sortQuestionnaires" class="form-label">Sorteer op:</label>
         <select id="sortQuestionnaires" class="form-select">
             <option value="date">Datum/Tijd</option>
@@ -12,23 +16,28 @@ include __DIR__ . '/../header.php';
         </select>
     </div>
     <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Vragenlijst</th>
-                <th>Gemiddelde Score</th>
-                <th>Actie</th>
-            </tr>
-        </thead>
-        <tbody id="questionnaireResults">
-        <?php foreach ($_SESSION['results'] as $questionnaire): ?>
-            <tr data-date="<?= htmlspecialchars($questionnaire['date'] ?? ''); ?>" data-course="<?= htmlspecialchars($questionnaire['name'] ?? ''); ?>">
-                <td><?= htmlspecialchars($questionnaire['name'] ?? ''); ?></td>
-                <td><?= htmlspecialchars($questionnaire['score'] ?? ''); ?></td>
-                <td><a href="/" class="btn btn-success">Open Vragenlijst</a></td>
-            </tr>
-        <?php endforeach; ?>
-        </tbody>
-    </table>
+    <thead>
+        <tr>
+            <th>Vragenlijst</th>
+            <th>Gemiddelde Score</th>
+            <th>Actie</th>
+        </tr>
+    </thead>
+    <tbody id="questionnaireResults">
+    <?php foreach ($_SESSION['results'] as $questionnaire): ?>
+        <tr>
+            <td><?= htmlspecialchars($questionnaire['name'] ?? ''); ?></td>
+            <td><?= htmlspecialchars($questionnaire['score'] ?? ''); ?></td>
+            <td>
+                <form method="POST">
+                    <input type="hidden" name="selected_questionnaire" value="<?= htmlspecialchars($questionnaire['id']); ?>">
+                    <button type="submit" class="btn btn-success">Open Vragenlijst</button>
+                </form>
+            </td>
+        </tr>
+    <?php endforeach; ?>
+    </tbody>
+</table>
 </div>
 <div>
     <h2>Geplaatste Berichten</h2>
@@ -92,6 +101,30 @@ include __DIR__ . '/../header.php';
 
         items.forEach(function(item) {
             ul.appendChild(item);
+        });
+    });
+
+    document.getElementById('searchCourse').addEventListener('input', function() {
+        var searchTerm = this.value.toLowerCase();
+        var questionnaireRows = document.querySelectorAll('#questionnaireResults tr');
+        var messageItems = document.querySelectorAll('#messages li');
+
+        questionnaireRows.forEach(function(row) {
+            var courseName = row.getAttribute('data-course').toLowerCase();
+            if (courseName.includes(searchTerm)) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+
+        messageItems.forEach(function(item) {
+            var courseName = item.getAttribute('data-course').toLowerCase();
+            if (courseName.includes(searchTerm)) {
+                item.style.display = '';
+            } else {
+                item.style.display = 'none';
+            }
         });
     });
 </script>

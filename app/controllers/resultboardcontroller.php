@@ -20,6 +20,11 @@ class ResultBoardController {
         if (!$loginController->checkLogin()) {
             $loginController->login();
         } else {
+            if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['selected_questionnaire'])) {
+                $selectedQuestionnaire = $_POST['selected_questionnaire'];
+                $_SESSION['resultCource'] = $selectedQuestionnaire;
+                header('Location: /ResultQuestionnaire');
+            }
             $messages = $this->MassageService->getAll();
             $_SESSION['messages'] = $messages;
             $results = $this->QuestionnaireService->getAll();
