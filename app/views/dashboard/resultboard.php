@@ -5,41 +5,42 @@ include __DIR__ . '/../header.php';
 <div class="mb-4">
     <h2>Resultaten van de Vragenlijsten</h2>
     <div class="mb-3">
-        <label for="searchCourse" class="form-label">Zoek op cursus:</label>
-        <input type="text" id="searchCourse" class="form-control" placeholder="Voer cursusnaam in">
+        <label for="searchCourse" class="form-label">Zoek op cursus of docent:</label>
+        <input type="text" id="searchCourse" class="form-control" placeholder="Voer cursusnaam of docentnaam in">
     </div>
     <div class="mb-3">
         <label for="sortQuestionnaires" class="form-label">Sorteer op:</label>
         <select id="sortQuestionnaires" class="form-select">
             <option value="date">Datum/Tijd</option>
             <option value="course">Cursus</option>
+            <option value="teacher">Docent</option>
         </select>
     </div>
     <table class="table table-striped">
-    <thead>
-        <tr>
-            <th>Cursus</th>
-            <th>Docent</th>
-            <th>Gemiddelde Score</th>
-            <th>Actie</th>
-        </tr>
-    </thead>
-    <tbody id="questionnaireResults">
-    <?php foreach ($_SESSION['results'] as $questionnaire): ?>
-        <tr data-date="<?= htmlspecialchars($questionnaire['date'] ?? ''); ?>" data-course="<?= htmlspecialchars($questionnaire['name'] ?? ''); ?>">
-            <td><?= htmlspecialchars($questionnaire['name'] ?? ''); ?></td>
-            <td><?= htmlspecialchars($questionnaire['teacher'] ?? ''); ?></td>
-            <td><?= htmlspecialchars($questionnaire['score'] ?? ''); ?></td>
-            <td>
-                <form method="POST">
-                    <input type="hidden" name="selected_questionnaire" value="<?= htmlspecialchars($questionnaire['id']); ?>">
-                    <button type="submit" class="btn btn-success">Open Vragenlijst</button>
-                </form>
-            </td>
-        </tr>
-    <?php endforeach; ?>
-</tbody>
-</table>
+        <thead>
+            <tr>
+                <th>Cursus</th>
+                <th>Docent</th>
+                <th>Gemiddelde Score</th>
+                <th>Actie</th>
+            </tr>
+        </thead>
+        <tbody id="questionnaireResults">
+        <?php foreach ($_SESSION['results'] as $questionnaire): ?>
+            <tr data-date="<?= htmlspecialchars($questionnaire['date'] ?? ''); ?>" data-course="<?= htmlspecialchars($questionnaire['name'] ?? ''); ?>" data-teacher="<?= htmlspecialchars($questionnaire['teacher'] ?? ''); ?>">
+                <td><?= htmlspecialchars($questionnaire['name'] ?? ''); ?></td>
+                <td><?= htmlspecialchars($questionnaire['teacher'] ?? ''); ?></td>
+                <td><?= htmlspecialchars($questionnaire['score'] ?? ''); ?></td>
+                <td>
+                    <form method="POST">
+                        <input type="hidden" name="selected_questionnaire" value="<?= htmlspecialchars($questionnaire['id']); ?>">
+                        <button type="submit" class="btn btn-success">Open Vragenlijst</button>
+                    </form>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+        </tbody>
+    </table>
 </div>
 <div>
     <h2>Geplaatste Berichten</h2>
@@ -48,11 +49,12 @@ include __DIR__ . '/../header.php';
         <select id="sortMessages" class="form-select">
             <option value="date">Datum/Tijd</option>
             <option value="course">Cursus</option>
+            <option value="teacher">Docent</option>
         </select>
     </div>
     <ul id="messages" class="list-group">
         <?php foreach ($_SESSION['messages'] as $message): ?>
-            <li class="list-group-item" data-date="<?= htmlspecialchars($message['message']->getDateTime() ?? ''); ?>" data-course="<?= htmlspecialchars($message['message']->getCourseId() ?? ''); ?>">
+            <li class="list-group-item" data-date="<?= htmlspecialchars($message['message']->getDateTime() ?? ''); ?>" data-course="<?= htmlspecialchars($message['message']->getCourseId() ?? ''); ?>" data-teacher="<?= htmlspecialchars($message['teacher'] ?? ''); ?>">                
                 <strong><?= htmlspecialchars($message['message']->getCourseId() ?? ''); ?></strong> - Docent: <strong><?= htmlspecialchars($message['teacher'] ?? ''); ?></strong> - <?= htmlspecialchars($message['message']->getDescription() ?? ''); ?>
                 <p><?= htmlspecialchars($message['message']->getContent() ?? ''); ?></p>
                 <?php if (!empty($message['message']->getImageString())): ?>
@@ -113,7 +115,10 @@ include __DIR__ . '/../header.php';
 
         questionnaireRows.forEach(function(row) {
             var courseName = row.getAttribute('data-course').toLowerCase();
-            if (courseName.includes(searchTerm)) {
+            var teacherName = row.getAttribute('data-teacher').toLowerCase();
+            if (courseName.includes(searchTerm) ) {
+                row.style.display = '';
+            } else if (teacherName.includes(searchTerm)) { 
                 row.style.display = '';
             } else {
                 row.style.display = 'none';
@@ -122,7 +127,10 @@ include __DIR__ . '/../header.php';
 
         messageItems.forEach(function(item) {
             var courseName = item.getAttribute('data-course').toLowerCase();
+            var teacherName = item.getAttribute('data-teacher').toLowerCase();
             if (courseName.includes(searchTerm)) {
+                item.style.display = '';
+            } else if (teacherName.includes(searchTerm)) { 
                 item.style.display = '';
             } else {
                 item.style.display = 'none';
