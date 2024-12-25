@@ -9,6 +9,12 @@ class Teacher extends User {
         $this->teacherId = $_teacherId;
     }
 
+    public function jsonSerialize(): array
+    {
+        $var = get_object_vars($this);
+        return $var;
+    }
+
     public function getTeacherId() {
         return $this->teacherId;
     }

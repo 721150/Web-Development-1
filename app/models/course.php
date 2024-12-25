@@ -12,6 +12,12 @@ class Course {
         $this->discipline = $_discipline;
     }
 
+    public function jsonSerialize(): array
+    {
+        $var = get_object_vars($this);
+        return $var;
+    }
+
     public function getId() {
         return $this->id;
     }
