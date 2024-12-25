@@ -12,7 +12,7 @@ class QuestionnaireRepository extends Repository {
     }
 
     public function getAll() {
-        $stmt = $this->connection->prepare("SELECT c.id, c.name, AVG((a.answerOne + a.answerTwo + a.answerThree + a.answerFour + a.answerFive +a.answerSix + a.answerSeven + a.answerEight + a.answerNine + a.answerTen +a.answerEleven + a.answerTwelve + a.answerThirteen) / 13) as average_score, a.time FROM Cource c JOIN Assessment a ON c.id = a.courceId GROUP BY c.id, c.name ORDER BY a.time DESC");
+        $stmt = $this->connection->prepare("SELECT c.id, c.name, AVG((a.answerOne + a.answerTwo + a.answerThree + a.answerFour + a.answerFive +a.answerSix + a.answerSeven + a.answerEight + a.answerNine + a.answerTen +a.answerEleven + a.answerTwelve + a.answerThirteen) / 13) as average_score, a.time, u.firstname, u.lastname FROM Cource c JOIN Assessment a ON c.id = a.courceId JOIN teacherCource tc ON tc.courceId = c.id JOIN Teacher t ON t.id = tc.teacherId JOIN User u ON u.id = t.teacherId GROUP BY c.id, c.name ORDER BY a.time DESC");
         $stmt->execute();
 
         $results = [];
@@ -21,7 +21,8 @@ class QuestionnaireRepository extends Repository {
                 'id' => $row['id'],
                 'name' => $row['name'],
                 'score' => round($row['average_score'], 2),
-                'date' => $row['time']
+                'date' => $row['time'],
+                'teacher' => $row['firstname'] . " " . $row['lastname']
             ];
         }
 

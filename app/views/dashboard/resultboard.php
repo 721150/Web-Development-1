@@ -18,7 +18,8 @@ include __DIR__ . '/../header.php';
     <table class="table table-striped">
     <thead>
         <tr>
-            <th>Vragenlijst</th>
+            <th>Cursus</th>
+            <th>Docent</th>
             <th>Gemiddelde Score</th>
             <th>Actie</th>
         </tr>
@@ -27,6 +28,7 @@ include __DIR__ . '/../header.php';
     <?php foreach ($_SESSION['results'] as $questionnaire): ?>
         <tr data-date="<?= htmlspecialchars($questionnaire['date'] ?? ''); ?>" data-course="<?= htmlspecialchars($questionnaire['name'] ?? ''); ?>">
             <td><?= htmlspecialchars($questionnaire['name'] ?? ''); ?></td>
+            <td><?= htmlspecialchars($questionnaire['teacher'] ?? ''); ?></td>
             <td><?= htmlspecialchars($questionnaire['score'] ?? ''); ?></td>
             <td>
                 <form method="POST">
@@ -50,13 +52,13 @@ include __DIR__ . '/../header.php';
     </div>
     <ul id="messages" class="list-group">
         <?php foreach ($_SESSION['messages'] as $message): ?>
-            <li class="list-group-item" data-date="<?= htmlspecialchars($message->getDateTime() ?? ''); ?>" data-course="<?= htmlspecialchars($message->getCourseId() ?? ''); ?>">
-                <strong><?= htmlspecialchars($message->getCourseId() ?? ''); ?></strong> - <?= htmlspecialchars($message->getDescription() ?? ''); ?>
-                <p><?= htmlspecialchars($message->getContent() ?? ''); ?></p>
-                <?php if (!empty($message->getImageString())): ?>
-                    <img src="<?= htmlspecialchars($message->getImage() ?? ''); ?>" alt="Foto" class="img-fluid mt-2">
+            <li class="list-group-item" data-date="<?= htmlspecialchars($message['message']->getDateTime() ?? ''); ?>" data-course="<?= htmlspecialchars($message['message']->getCourseId() ?? ''); ?>">
+                <strong><?= htmlspecialchars($message['message']->getCourseId() ?? ''); ?></strong> - Docent: <strong><?= htmlspecialchars($message['teacher'] ?? ''); ?></strong> - <?= htmlspecialchars($message['message']->getDescription() ?? ''); ?>
+                <p><?= htmlspecialchars($message['message']->getContent() ?? ''); ?></p>
+                <?php if (!empty($message['message']->getImageString())): ?>
+                    <img src="<?= htmlspecialchars($message['message']->getImage() ?? ''); ?>" alt="Foto" class="img-fluid mt-2">
                 <?php endif; ?>
-                <span class="badge bg-secondary float-end"><?= htmlspecialchars($message->getDateTime() ?? ''); ?></span>
+                <span class="badge bg-secondary float-end"><?= htmlspecialchars($message['message']->getDateTime() ?? ''); ?></span>
             </li>
         <?php endforeach; ?>
     </ul>
