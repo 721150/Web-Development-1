@@ -25,7 +25,7 @@ include __DIR__ . '/../header.php';
     </thead>
     <tbody id="questionnaireResults">
     <?php foreach ($_SESSION['results'] as $questionnaire): ?>
-        <tr>
+        <tr data-date="<?= htmlspecialchars($questionnaire['date'] ?? ''); ?>" data-course="<?= htmlspecialchars($questionnaire['name'] ?? ''); ?>">
             <td><?= htmlspecialchars($questionnaire['name'] ?? ''); ?></td>
             <td><?= htmlspecialchars($questionnaire['score'] ?? ''); ?></td>
             <td>
@@ -36,7 +36,7 @@ include __DIR__ . '/../header.php';
             </td>
         </tr>
     <?php endforeach; ?>
-    </tbody>
+</tbody>
 </table>
 </div>
 <div>
