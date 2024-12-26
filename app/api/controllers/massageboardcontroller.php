@@ -15,7 +15,7 @@ class MassageBoardController {
 
     public function index() {
         if ($_SERVER["REQUEST_METHOD"] == "GET") {
-            $messages = $this->MassageService->getAll();
+            $messages = $this->MassageService->getAllWithoutTeacher();
             $messagesJSON = json_encode($messages);
             echo $messagesJSON;
         }

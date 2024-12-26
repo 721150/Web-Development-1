@@ -45,6 +45,21 @@ class MassageRepository extends Repository {
         return $messages;
     }
 
+    public function getAllWithoutTeacher() {
+        $messages = [];
+        try {
+            $stmt = $this->connection->prepare("SELECT Message.id, description, content, time, name, studentId, image FROM `Message` JOIN `Cource` ON Cource.id = Message.courceId ORDER BY time DESC");
+            $stmt->execute();
+
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $message = new Message($row['id'], $row['description'], $row['content'], $row['time'], $row['studentId'], $row['name'], $row['image']);
+                $messages[] = $message;
+            }
+        } catch (Exception $e) {}
+
+        return $messages;
+    }
+
     public function insert($message) {   
         try {
             $stmt = $this->connection->prepare("INSERT INTO `Message` (`description`, `content`, `time`, `courceId`, `studentId`, `image`) VALUES (:description, :content, current_timestamp(), :courseId, :studentId, :image)");

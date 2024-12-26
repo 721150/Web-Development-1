@@ -16,5 +16,10 @@ class MassageService {
         $reposotory = new \App\Repositories\MassageRepository();
         $reposotory->insert($message);
     }
+
+    public function getAllWithoutTeacher() {
+        $reposotory = new \App\Repositories\MassageRepository();
+        return $reposotory->getAllWithoutTeacher();
+    }
 }
 ?>
