@@ -29,7 +29,8 @@ class LoginController {
                 }
                 elseif ($user instanceof \App\Models\Admin) {
                     $_SESSION['admin'] = $user;
-                    http_response_code(404);
+                    $adminDashboardController = new AdminDashboardController();
+                    $adminDashboardController->index();
                 }
                 exit;
             }

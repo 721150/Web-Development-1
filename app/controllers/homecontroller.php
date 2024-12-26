@@ -17,13 +17,15 @@ class HomeController {
             $loginController->login();
         } else {
             if (isset($_SESSION['student'])) {
-                require __DIR__ . '/../views/dashboard/studentdasboard.php';
+                $studentDashboardController = new StudentDasboardController();
+                $studentDashboardController->index();
             }
             else if (isset($_SESSION['teacher'])) {
                 http_response_code(404);
             }
             else if (isset($_SESSION['admin'])) {
-                http_response_code(404);
+                $adminDashboardController = new AdminDashboardController();
+                $adminDashboardController->index();
             }
             exit;
         }

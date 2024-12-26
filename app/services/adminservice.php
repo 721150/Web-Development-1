@@ -1,9 +1,9 @@
 <?php
 namespace App\Services;
 
-class StudentService {
+class AdminService {
     public function getAll() {
-        $reposotory = new \App\Repositories\StudentRepository();
+        $reposotory = new \App\Repositories\AdminRepository();
         return $reposotory->getAll();
     }
 }
