@@ -26,6 +26,7 @@ namespace App\Views;
                 <input type="password" class="form-control" id="inputPassword" name="password">
             </div>
             <button type="submit" class="btn btn-success">Inloggen</button>
+            <a href="/Register" class="btn btn-outline-success">Account aanmaken</a>
             </form>
         </div>
     </div>
