@@ -35,7 +35,9 @@ namespace App\Views;
                     <label for="accountType" class="form-label">Soort Account</label>
                     <select class="form-control" id="accountType" name="accountType" required>
                         <option value="student">Student</option>
-                        <option value="docent">Docent</option>
+                        <?php if (isset($_SESSION['admin'])): ?>
+                            <option value="docent">Docent</option>
+                        <?php endif; ?>
                     </select>
                 </div>
                 <div class="mb-3">
