@@ -45,9 +45,14 @@ class ManageProfileController {
     }
 
     public function deleteProfile() {
-        $this->manageprofileserver->deleteProfile($_SESSION['student']);
-        $endSession = new EndingSessionController();
-        $endSession->endSession();
+        $loginController = new LoginController();
+        if (!$loginController->checkLogin()) {
+            $loginController->login();
+        } else {
+            $this->manageprofileserver->deleteProfile($_SESSION['student']);
+            $endSession = new EndingSessionController();
+            $endSession->endSession();
+        }
     }
 }
 ?>

@@ -18,15 +18,10 @@ class MassageBoardController {
         if (!$loginController->checkLogin()) {
             $loginController->login();
         } else {
-            $listOfCources = $this->loadCources();
+            $listOfCources = $this->MassageService->loadCourcesByStudent($_SESSION['student']);
             $_SESSION['listOfCources'] = $listOfCources;
             require __DIR__ . '/../views/dashboard/massageboard.php';
         }
-    }
-
-    private function loadCources() {
-        $listOfCources = $this->MassageService->loadCourcesByStudent($_SESSION['student']);
-        return $listOfCources;
     }
 }
 ?>

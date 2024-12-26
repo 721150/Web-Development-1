@@ -18,21 +18,21 @@ class StudentDasboardController {
         if (!$loginController->checkLogin()) {
             $loginController->login();
         } else {
-            $listOfQuestionnaire = $this->loadQuestionnaire();
+            $listOfQuestionnaire = $this->QuestionnaireService->loadOpenQusetionnaireByStudent($_SESSION['student']);
             $_SESSION['listOfQuestionnaire'] = $listOfQuestionnaire;
             require __DIR__ . '/../views/dashboard/studentdasboard.php';
         }
     }
 
     public function openQuestionnaire() {
-        $course = new Course($_POST['id'], $_POST['name'], $_POST['discipline']);
-        $_SESSION['course'] = $course;
-        header('Location: /Questionnaire');
-    }
-
-    private function loadQuestionnaire() {
-        $listOfQuestionnaire = $this->QuestionnaireService->loadOpenQusetionnaireByStudent($_SESSION['student']);
-        return $listOfQuestionnaire;
+        $loginController = new LoginController();
+        if (!$loginController->checkLogin()) {
+            $loginController->login();
+        } else {
+            $course = new Course($_POST['id'], $_POST['name'], $_POST['discipline']);
+            $_SESSION['course'] = $course;
+            header('Location: /Questionnaire');
+        }
     }
 }
 ?>
