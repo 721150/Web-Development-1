@@ -35,7 +35,10 @@ $selectedUser = $_SESSION['selectedUser'];
         </div>
     <?php endif; ?>
     <button type="submit" class="btn btn-success">Opslaan</button>
-    <a href="/ManageProfile/deleteProfile" class="btn btn-danger">Verwijderen</a>
+</form>
+<form method="POST" class="mt-2">
+    <input type="hidden" name="deleteUserId" value="<?= htmlspecialchars($selectedUser->getId()) ?>">
+    <button type="submit" class="btn btn-danger">Verwijderen</button>
 </form>
 <?php
 include __DIR__ . '/../footer.php';

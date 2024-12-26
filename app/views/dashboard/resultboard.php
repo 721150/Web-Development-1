@@ -29,7 +29,7 @@ include __DIR__ . '/../header.php';
         <?php foreach ($_SESSION['results'] as $questionnaire): ?>
             <tr data-date="<?= htmlspecialchars($questionnaire['date'] ?? ''); ?>" data-course="<?= htmlspecialchars($questionnaire['name'] ?? ''); ?>" data-teacher="<?= htmlspecialchars($questionnaire['teacher'] ?? ''); ?>">
                 <td><?= htmlspecialchars($questionnaire['name'] ?? ''); ?></td>
-                <td><?= htmlspecialchars($questionnaire['teacher'] ?? ''); ?></td>
+                <td><?= htmlspecialchars($questionnaire['teacher'] ?? 'Onbekent'); ?></td>
                 <td><?= htmlspecialchars($questionnaire['score'] ?? ''); ?></td>
                 <td>
                     <form method="POST">
@@ -54,7 +54,7 @@ include __DIR__ . '/../header.php';
     </div>
     <ul id="messages" class="list-group">
         <?php foreach ($_SESSION['messages'] as $message): ?>
-            <li class="list-group-item" data-date="<?= htmlspecialchars($message['message']->getDateTime() ?? ''); ?>" data-course="<?= htmlspecialchars($message['message']->getCourseId() ?? ''); ?>" data-teacher="<?= htmlspecialchars($message['teacher'] ?? ''); ?>">                
+            <li class="list-group-item" data-date="<?= htmlspecialchars($message['message']->getDateTime() ?? ''); ?>" data-course="<?= htmlspecialchars($message['message']->getCourseId() ?? ''); ?>" data-teacher="<?= htmlspecialchars($message['teacher'] ?? 'Onbekent'); ?>">                
                 <strong><?= htmlspecialchars($message['message']->getCourseId() ?? ''); ?></strong> - Docent: <strong><?= htmlspecialchars($message['teacher'] ?? ''); ?></strong> - <?= htmlspecialchars($message['message']->getDescription() ?? ''); ?>
                 <p><?= htmlspecialchars($message['message']->getContent() ?? ''); ?></p>
                 <?php if (!empty($message['message']->getImageString())): ?>

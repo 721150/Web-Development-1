@@ -7,9 +7,14 @@ class ManageProfileService {
         $reposotory->updateStudent($student);
     }
 
-    public function deleteProfile($student) {
+    public function deleteProfile($user) {
         $reposotory = new \App\Repositories\ManageProfileRepository();
-        $reposotory->deleteProfile($student);
+        $reposotory->deleteProfile($user);
+    }
+
+    public function deleteProfileById($id) {
+        $reposotory = new \App\Repositories\ManageProfileRepository();
+        $reposotory->deleteProfileById($id);
     }
 }
 ?>

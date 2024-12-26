@@ -45,10 +45,18 @@ class ManageProfileRepository extends Repository {
         $stmtStudent->execute();
     }
 
-    public function deleteProfile($student) {
+    public function deleteProfile($user) {
         $stmtUser = $this->connection->prepare("DELETE FROM `User` WHERE id = :id");
         
-        $id = $student->getId();
+        $id = $user->getId();
+        
+        $stmtUser->bindParam(':id', $id);
+
+        $stmtUser->execute();
+    }
+
+    public function deleteProfileById($id) {
+        $stmtUser = $this->connection->prepare("DELETE FROM `User` WHERE id = :id");
         
         $stmtUser->bindParam(':id', $id);
 

@@ -5,6 +5,7 @@ class EditProfileController {
     private $teacherService;
     private $studentService;
     private $adminService;
+    private $manageprofileserver;
 
     function __construct() {
         if (session_status() == PHP_SESSION_NONE) {
@@ -13,6 +14,7 @@ class EditProfileController {
         $this->teacherService = new \App\Services\TeacherService();
         $this->studentService = new \App\Services\StudentService();
         $this->adminService = new \App\Services\AdminService();
+        $this->manageprofileserver = new \App\Services\ManageProfileService();
     }
 
     public function index() {
@@ -20,6 +22,11 @@ class EditProfileController {
         if (!$loginController->checkLogin()) {
             $loginController->login();
         } else {
+            if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['deleteUserId'])) {
+                $this->manageprofileserver->deleteProfileById($_POST['deleteUserId']);
+                header('Location: /');
+                exit;
+                }
             require __DIR__ . '/../views/profile/editprofile.php';
         }
     }
