@@ -15,7 +15,11 @@ $allAdmins = $_SESSION['allAdmins'];
                 <div class="card mb-2 teacher" data-name="<?= htmlspecialchars($teacher->getFullName()) ?>">
                     <div class="card-body">
                         <h5 class="card-title"><?= htmlspecialchars($teacher->getFullName()) ?></h5>
-                        <a href="/profile.php?id=<?= htmlspecialchars($teacher->getId()) ?>" class="btn btn-primary">Bekijk Profiel</a>
+                        <form method="POST">
+                            <input type="hidden" name="selected_user" value="<?= htmlspecialchars($teacher->getId()) ?>">
+                            <input type="hidden" name="type_user" value="teacher">
+                            <button type="submit" class="btn btn-primary">Bekijk Profiel</button>
+                        </form>
                     </div>
                 </div>
             <?php endforeach; ?>
@@ -28,7 +32,11 @@ $allAdmins = $_SESSION['allAdmins'];
                 <div class="card mb-2 student" data-name="<?= htmlspecialchars($student->getFullName()) ?>">
                     <div class="card-body">
                         <h5 class="card-title"><?= htmlspecialchars($student->getFullName()) ?></h5>
-                        <a href="/profile.php?id=<?= htmlspecialchars($student->getId()) ?>" class="btn btn-primary">Bekijk Profiel</a>
+                        <form method="POST">
+                            <input type="hidden" name="selected_user" value="<?= htmlspecialchars($student->getId()) ?>">
+                            <input type="hidden" name="type_user" value="student">
+                            <button type="submit" class="btn btn-primary">Bekijk Profiel</button>
+                        </form>
                     </div>
                 </div>
             <?php endforeach; ?>
@@ -41,7 +49,11 @@ $allAdmins = $_SESSION['allAdmins'];
                 <div class="card mb-2 admin" data-name="<?= htmlspecialchars($admin->getFullName()) ?>">
                     <div class="card-body">
                         <h5 class="card-title"><?= htmlspecialchars($admin->getFullName()) ?></h5>
-                        <a href="/profile.php?id=<?= htmlspecialchars($admin->getId()) ?>" class="btn btn-primary">Bekijk Profiel</a>
+                        <form method="POST">
+                            <input type="hidden" name="selected_user" value="<?= htmlspecialchars($admin->getId()) ?>">
+                            <input type="hidden" name="type_user" value="admin">
+                            <button type="submit" class="btn btn-primary">Bekijk Profiel</button>
+                        </form>
                     </div>
                 </div>
             <?php endforeach; ?>

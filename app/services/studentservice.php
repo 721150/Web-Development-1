@@ -6,5 +6,10 @@ class StudentService {
         $reposotory = new \App\Repositories\StudentRepository();
         return $reposotory->getAll();
     }
+
+    public function getById($id) {
+        $reposotory = new \App\Repositories\StudentRepository();
+        return $reposotory->getById($id);
+    }
 }
 ?>

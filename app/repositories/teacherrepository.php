@@ -24,5 +24,26 @@ class TeacherRepository extends Repository {
 
         return $teachers;
     }
+
+    public function getById($id) {
+        $stmt = $this->connection->prepare("SELECT * FROM Teacher JOIN User ON Teacher.teacherId = User.id WHERE User.id = :id");
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($row) {
+            return new \App\Models\Teacher(
+                $row['id'],
+                $row['firstname'],
+                $row['lastname'],
+                $row['emailAddress'],
+                $row['password'],
+                $row['image'],
+                $row['teacherId']
+            );
+        }
+
+        return null;
+    }
 }
 ?>

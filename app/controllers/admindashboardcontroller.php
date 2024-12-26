@@ -20,6 +20,19 @@ class AdminDashboardController {
         if (!$loginController->checkLogin()) {
             $loginController->login();
         } else {
+            if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['selected_user'])) {
+                $selectedUser = htmlspecialchars($_POST['selected_user']);
+                $user = null;
+                if ($_POST['type_user'] == "student") {
+                    $user = $this->studentService->getById($selectedUser);
+                } else if ($_POST['type_user'] == "teacher") {
+                    $user = $this->teacherService->getById($selectedUser);
+                } else if ($_POST['type_user'] == "admin") {
+                    $user = $this->adminService->getById($selectedUser);
+                }
+                $_SESSION['selectedUser'] = $user;
+                header('Location: /EditProfile');
+            }
             $allTeachers = $this->teacherService->getAll();
             $_SESSION['allTeachers'] = $allTeachers;
             $allStudents = $this->studentService->getAll();
