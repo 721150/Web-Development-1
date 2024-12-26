@@ -32,6 +32,8 @@ class RegisterController {
                 $this->registerserver->addStudent($user);
             } else if ($accountType == "docent") {
                 $this->registerserver->addTeacher($user);
+            } else if ($accountType == "beheerder") {
+                $this->registerserver->addAdmin($user);
             }
             header('Location: /');
         }

@@ -11,5 +11,10 @@ class RegisterService {
         $reposotory = new \App\Repositories\RegisterRepository();
         $reposotory->addTeacher($teacher);
     }
+
+    public function addAdmin($admin) {
+        $reposotory = new \App\Repositories\RegisterRepository();
+        $reposotory->addTeacher($admin);
+    }
 }
 ?>

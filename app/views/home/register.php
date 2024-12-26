@@ -37,6 +37,7 @@ namespace App\Views;
                         <option value="student">Student</option>
                         <?php if (isset($_SESSION['admin'])): ?>
                             <option value="docent">Docent</option>
+                            <option value="beheerder">Beheerder</option>
                         <?php endif; ?>
                     </select>
                 </div>
