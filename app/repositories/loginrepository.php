@@ -4,6 +4,7 @@ namespace App\Repositories;
 use PDO;
 use App\Models\Student;
 use App\Models\Teacher;
+use App\Models\Admin;
 
 class LoginRepository extends Repository {
     
@@ -31,6 +32,16 @@ class LoginRepository extends Repository {
     
                 if ($result && password_verify($password, $result['password'])) {
                     $user = new Teacher($result['id'], $result['firstname'], $result['lastname'], $result['emailAddress'], null, $result['image'], $result['teacherId']);
+                }
+            }
+            if ($user == null) {
+                $stmt = $this->connection->prepare("SELECT User.id, firstname, lastname, emailAddress, password, image, Admin.id AS adminId FROM `Admin` JOIN `User` ON User.id = Admin.adminId WHERE emailAddress = :email");
+                $stmt->execute([':email' => $email]);
+    
+                $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+                if ($result && password_verify($password, $result['password'])) {
+                    $user = new Admin($result['id'], $result['firstname'], $result['lastname'], $result['emailAddress'], null, $result['image'], $result['adminId']);
                 }
             }
         } catch (Exception $e) {}

@@ -23,8 +23,12 @@ class LoginController {
                     $studentDashboardController = new StudentDasboardController();
                     $studentDashboardController->index();
                 }
-                elseif($user instanceof \App\Models\Teacher) {
+                elseif ($user instanceof \App\Models\Teacher) {
                     $_SESSION['teacher'] = $user;
+                    http_response_code(404);
+                }
+                elseif ($user instanceof \App\Models\Admin) {
+                    $_SESSION['admin'] = $user;
                     http_response_code(404);
                 }
                 exit;
