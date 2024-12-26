@@ -33,6 +33,14 @@ $selectedUser = $_SESSION['selectedUser'];
             <label for="about" class="form-label">Over</label>
             <textarea class="form-control" id="about" name="about" rows="3"><?= htmlspecialchars($selectedUser->getAbout() ?? ''); ?></textarea>
         </div>
+        <input type="hidden" name="type_user" value="student">
+    <?php endif; ?>
+    <input type="hidden" name="editUserId" value="<?= htmlspecialchars($selectedUser->getId()) ?>">
+    <?php if ($selectedUser instanceof \App\Models\Teacher): ?>
+        <input type="hidden" name="type_user" value="teacher">
+    <?php endif; ?>
+    <?php if ($selectedUser instanceof \App\Models\Admin): ?>
+        <input type="hidden" name="type_user" value="admin">
     <?php endif; ?>
     <button type="submit" class="btn btn-success">Opslaan</button>
 </form>

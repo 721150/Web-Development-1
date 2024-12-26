@@ -11,22 +11,33 @@ class ManageProfileRepository extends Repository {
     }
 
     public function updateStudent($student) {
-        $stmtUser = $this->connection->prepare("UPDATE `User` SET firstName = :firstName, lastName = :lastName, emailAddress = :email, image = :image WHERE id = :id");
+        $query = "UPDATE `User` SET firstName = :firstName, lastName = :lastName, emailAddress = :email";
     
         $firstName = $student->getFirstName();
         $lastName = $student->getLastName();
         $email = $student->getEmailAddress();
-        $image = $student->getImageString();
         $id = $student->getId();
-    
+        
+        if ($student->getImageString() !== null) {
+            $query .= ", image = :image";
+        }
+        
+        $query .= " WHERE id = :id";
+        
+        $stmtUser = $this->connection->prepare($query);
+        
         $stmtUser->bindParam(':firstName', $firstName);
         $stmtUser->bindParam(':lastName', $lastName);
         $stmtUser->bindParam(':email', $email);
-        $stmtUser->bindParam(':image', $image);
         $stmtUser->bindParam(':id', $id);
-    
+        
+        if ($student->getImageString() !== null) {
+            $image = $student->getImageString();
+            $stmtUser->bindParam(':image', $image);
+        }
+        
         $stmtUser->execute();
-    
+        
         if ($student->getPassword()) {
             $stmtPassword = $this->connection->prepare("UPDATE `User` SET password = :password WHERE id = :id");
             $password = password_hash($student->getPassword(), PASSWORD_DEFAULT);
@@ -34,14 +45,14 @@ class ManageProfileRepository extends Repository {
             $stmtPassword->bindParam(':id', $id);
             $stmtPassword->execute();
         }
-    
+        
         $stmtStudent = $this->connection->prepare("UPDATE `Student` SET about = :about WHERE studentId = :id");
-    
+        
         $about = $student->getAbout();
-    
+        
         $stmtStudent->bindParam(':about', $about);
         $stmtStudent->bindParam(':id', $id);
-    
+        
         $stmtStudent->execute();
     }
 

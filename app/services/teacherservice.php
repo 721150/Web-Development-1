@@ -11,5 +11,10 @@ class TeacherService {
         $reposotory = new \App\Repositories\TeacherRepository();
         return $reposotory->getById($id);
     }
+
+    public function updateTeacher($teacher) {
+        $reposotory = new \App\Repositories\TeacherRepository();
+        $reposotory->updateTeacher($teacher);
+    }
 }
 ?>

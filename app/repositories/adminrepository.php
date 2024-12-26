@@ -45,5 +45,42 @@ class AdminRepository extends Repository {
 
         return null;
     }
+
+    public function updateAdmin($admin) {
+        $query = "UPDATE `User` SET firstName = :firstName, lastName = :lastName, emailAddress = :email";
+    
+        $firstName = $admin->getFirstName();
+        $lastName = $admin->getLastName();
+        $email = $admin->getEmailAddress();
+        $id = $admin->getId();
+        
+        if ($admin->getImageString() !== null) {
+            $query .= ", image = :image";
+        }
+        
+        $query .= " WHERE id = :id";
+        
+        $stmtUser = $this->connection->prepare($query);
+        
+        $stmtUser->bindParam(':firstName', $firstName);
+        $stmtUser->bindParam(':lastName', $lastName);
+        $stmtUser->bindParam(':email', $email);
+        $stmtUser->bindParam(':id', $id);
+        
+        if ($admin->getImageString() !== null) {
+            $image = $admin->getImageString();
+            $stmtUser->bindParam(':image', $image);
+        }
+        
+        $stmtUser->execute();
+        
+        if ($admin->getPassword()) {
+            $stmtPassword = $this->connection->prepare("UPDATE `User` SET password = :password WHERE id = :id");
+            $password = password_hash($admin->getPassword(), PASSWORD_DEFAULT);
+            $stmtPassword->bindParam(':password', $password);
+            $stmtPassword->bindParam(':id', $id);
+            $stmtPassword->execute();
+        }
+    }
 }
 ?>

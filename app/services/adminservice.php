@@ -11,5 +11,10 @@ class AdminService {
         $reposotory = new \App\Repositories\AdminRepository();
         return $reposotory->getById($id);
     }
+
+    public function updateAdmin($admin) {
+        $reposotory = new \App\Repositories\AdminRepository();
+        $reposotory->updateAdmin($admin);
+    }
 }
 ?>
