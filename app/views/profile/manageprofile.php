@@ -25,7 +25,7 @@ include __DIR__ . '/../header.php';
             <?php if ($_SESSION['student']->getImage()): ?>
                 <img src="<?= htmlspecialchars($_SESSION['student']->getImage()); ?>" alt="Profielfoto" class="img-thumbnail mb-3" style="max-width: 150px;">
             <?php endif; ?>
-        <input type="file" class="form-control" id="image" name="image">
+        <input type="file" class="form-control" id="image" name="image" accept="image/*">
     </div>
     <div class="mb-3">
         <label for="about" class="form-label">Over</label>

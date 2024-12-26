@@ -21,7 +21,7 @@ class ResultBoardController {
             $loginController->login();
         } else {
             if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['selected_questionnaire'])) {
-                $selectedQuestionnaire = $_POST['selected_questionnaire'];
+                $selectedQuestionnaire = htmlspecialchars($_POST['selected_questionnaire']);
                 $_SESSION['resultCource'] = $selectedQuestionnaire;
                 header('Location: /ResultQuestionnaire');
             }
