@@ -18,8 +18,7 @@
         </div>
         <div>
             <a href="/" class="text-white px-3" style="text-decoration: none;">Docenten, Studenten en Beheerders</a>
-            <a href="/Register" class="text-white px-3" style="text-decoration: none;">Toevoegen gebruiker</a>
-            <a href="/ManageProfile" class="text-white px-3" style="text-decoration: none;">Instellingen</a>
+            <a href="/RegisterProfile" class="text-white px-3" style="text-decoration: none;">Toevoegen gebruiker</a>
             <a href="/EndingSession/endSession" class="text-white px-3" style="text-decoration: none;">Uitloggen</a>
         </div>
     </div>
