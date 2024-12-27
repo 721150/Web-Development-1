@@ -6,7 +6,7 @@ use PDO;
 class StudentRepository extends Repository {
     
     function getAll() {
-        $stmt = $this->connection->prepare("SELECT * FROM Student JOIN User ON Student.studentId = User.id");
+        $stmt = $this->connection->prepare("SELECT Student.id AS studentId, User.id, User.firstname, User.lastname, User.emailAddress, User.password, User.image, Student.about FROM Student JOIN User ON Student.studentId = User.id");
         $stmt->execute();
 
         $students = [];

@@ -21,7 +21,8 @@ class HomeController {
                 $studentDashboardController->index();
             }
             else if (isset($_SESSION['teacher'])) {
-                http_response_code(404);
+                $teacherDashboardController = new TeacherDashboardController();
+                $teacherDashboardController->index();
             }
             else if (isset($_SESSION['admin'])) {
                 $adminDashboardController = new AdminDashboardController();

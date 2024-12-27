@@ -25,7 +25,8 @@ class LoginController {
                 }
                 elseif ($user instanceof \App\Models\Teacher) {
                     $_SESSION['teacher'] = $user;
-                    http_response_code(404);
+                    $teacherDashboardController = new TeacherDashboardController();
+                    $teacherDashboardController->index();
                 }
                 elseif ($user instanceof \App\Models\Admin) {
                     $_SESSION['admin'] = $user;
