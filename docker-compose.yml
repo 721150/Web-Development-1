@@ -29,6 +29,7 @@ services:
             MYSQL_DATABASE: 'web-development-1'
         volumes:
             - mysqldata:/var/lib/mysql
+            - ./sql:/docker-entrypoint-initdb.d
         ports:
             - 3306:3306
   
