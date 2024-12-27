@@ -17,8 +17,7 @@
             <h5 class="ms-2 mb-0"><?=$_SESSION['teacher']->getFullName()?></h5>
         </div>
         <div>
-            <a href="/" class="text-white px-3" style="text-decoration: none;">Docenten, Studenten en Beheerders</a>
-            <a href="/RegisterProfile" class="text-white px-3" style="text-decoration: none;">Toevoegen gebruiker</a>
+            <a href="/" class="text-white px-3" style="text-decoration: none;">Cursussen</a>
             <a href="/EndingSession/endSession" class="text-white px-3" style="text-decoration: none;">Uitloggen</a>
         </div>
     </div>
