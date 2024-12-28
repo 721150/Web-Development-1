@@ -1,13 +1,21 @@
 # Web-Development-1
+Document met daarin de gebruikersnamen en wachtwoorden van de gebruikers.
+...
 
-Studenten:
-m.dehaan@inholland.nl
-123
+Student:
+Gebruikersnaam: m.dehaan@inholland.nl
+Wachtwoord: 123
 
-Docenten:
-m.vanvreeland@inholland.nl
-123
+...
 
-Beherders:
-s.schaper@inholland.nl
-123
+Docent:
+Gebruikersnaam: m.vanvreeland@inholland.nl
+Wachtwoord: 123
+
+...
+
+Beherder:
+Gebruikersnaam: s.schaper@inholland.nl
+Wachtwoord: 123
+
+...
